@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from './HeroSection.astro';
+import Container from './Container.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import ServiceCard from './ServiceCard.astro';
+import AreaCard from './AreaCard.astro';
+import FAQSection from './FAQSection.astro';
+import CTASection from './CTASection.astro';
+import SplitImageSection from './SplitImageSection.astro';
+import { getNearbyAreas, type PriorityArea } from '../data/areas';
+
+interface Props {
+  area: PriorityArea;
+}
+
+const { area } = Astro.props;
+const nearbyAreas = getNearbyAreas(area);
+
+const services = [
+  {
+    title: "Kostnadsfritt hembesök",
+    description: `Vi går igenom huset i ${area.name} och tar fram en lösning som passar bostadens behov.`,
+    link: "/kontakt",
+    image: "/images/hero.png",
+    imageAlt: `Hembesök inför luftvärmepump i ${area.name}`,
+  },
+  {
+    title: "Installation",
+    description: `Fackmässig installation av luftvärmepump i ${area.name} med tydlig offert och ROT-avdrag.`,
+    link: "/installation-luftvarmepump",
+    image: "/images/service-installation.png",
+    imageAlt: `Installation av luftvärmepump i ${area.name}`,
+  },
+  {
+    title: "Service",
+    description: `Regelbunden service hjälper pumpen att behålla god effekt och längre livslängd.`,
+    link: "/service-luftvarmepump",
+    image: "/images/service-maintenance.png",
+    imageAlt: `Service av luftvärmepump i ${area.name}`,
+  },
+  {
+    title: "Felsökning",
+    description: `Vi felsöker vid felkoder, missljud, dålig värme eller andra problem med pumpen.`,
+    link: "/felsokning-luftvarmepump",
+    image: "/images/service-troubleshooting.png",
+    imageAlt: `Felsökning av luftvärmepump i ${area.name}`,
+  },
+];
+---
+
+<BaseLayout title={area.title} description={area.description}>
+  <Breadcrumbs crumbs={[{ text: "Områden" }, { text: area.name }]} />
+
+  <HeroSection
+    eyebrow={`Lokal landningssida för ${area.name}`}
+    title={area.heroTitle}
+    description={area.heroText}
+    primaryCTA={{ text: `Begär offert i ${area.name}`, link: "/offert" }}
+    secondaryCTA={{ text: "Se produkter", link: "/produkter" }}
+    image="/images/hero.png"
+    imageAlt={`Luftvärmepump installerad i ${area.name}`}
+    size="medium"
+  />
+
+  <section class="section-padding">
+    <Container>
+      <div class="intro-layout">
+        <div>
+          <span class="eyebrow">Luftvärmepump {area.name}</span>
+          <h2>Rätt pump, rätt placering och tydlig offert</h2>
+          <p>{area.intro}</p>
+        </div>
+        <div class="local-note">
+          <h3>Lokalt fokus</h3>
+          <p>{area.localAngle}</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding bg-light">
+    <Container>
+      <div class="section-header">
+        <span class="eyebrow">Tjänster</span>
+        <h2>Det här hjälper vi dig med i {area.name}</h2>
+      </div>
+      <div class="services-grid">
+        {services.map((service) => (
+          <ServiceCard {...service} />
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding">
+    <Container>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <h3>{area.benefitOne}</h3>
+          <p>{area.benefitOneText}</p>
+        </div>
+        <div class="benefit-item">
+          <h3>{area.benefitTwo}</h3>
+          <p>{area.benefitTwoText}</p>
+        </div>
+        <div class="benefit-item">
+          <h3>{area.benefitThree}</h3>
+          <p>{area.benefitThreeText}</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <SplitImageSection
+    title={`Prisförslag för luftvärmepump i ${area.name}`}
+    description="Vi hjälper dig att jämföra rätt modell, installationsförutsättningar och ROT-avdrag innan du bestämmer dig."
+    buttonText="Begär offert"
+    buttonLink="/offert"
+    image="/images/service-installation.png"
+    imageAlt={`Prisförslag för luftvärmepump i ${area.name}`}
+  />
+
+  <section class="section-padding bg-light">
+    <Container>
+      <div class="section-header compact">
+        <span class="eyebrow">Prioriterade områden</span>
+        <h2>Vi fokuserar på tre områden</h2>
+      </div>
+      <div class="areas-grid">
+        {nearbyAreas.map((nearby) => (
+          <AreaCard
+            name={nearby.name}
+            link={nearby.url}
+            description={`Luftvärmepump i ${nearby.name}`}
+          />
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <FAQSection faqs={area.faqs} />
+
+  <CTASection
+    title={`Vill du ha hjälp i ${area.name}?`}
+    description="Skicka en offertförfrågan så återkommer vi med rådgivning, prisbild och nästa steg."
+    buttonText={`Få offert i ${area.name}`}
+    buttonLink="/offert"
+  />
+</BaseLayout>
+
+<style>
+  .bg-light {
+    background: var(--bg-subtle);
+  }
+
+  .intro-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .intro-layout h2,
+  .section-header h2 {
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .intro-layout p,
+  .local-note p {
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+
+  .local-note,
+  .benefit-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 2rem;
+  }
+
+  .local-note h3,
+  .benefit-item h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-header {
+    max-width: 760px;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header.compact {
+    margin-bottom: 2rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 2rem;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 820px) {
+    .intro-layout,
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

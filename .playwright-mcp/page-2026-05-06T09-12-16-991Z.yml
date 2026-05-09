@@ -1,0 +1,171 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e4]:
+      - link "HISINGE LUFTVÄRME" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - list [ref=e6]:
+        - listitem [ref=e7]:
+          - link "Start" [ref=e8] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e9]:
+          - link "Tjänster" [ref=e10] [cursor=pointer]:
+            - /url: /#tjanster
+        - listitem [ref=e11]:
+          - link "Områden" [ref=e12] [cursor=pointer]:
+            - /url: /#omraden
+        - listitem [ref=e13]:
+          - link "Kontakt" [ref=e14] [cursor=pointer]:
+            - /url: /kontakt
+      - generic [ref=e15]:
+        - link "031-000 00 00" [ref=e16] [cursor=pointer]:
+          - /url: tel:0310000000
+        - link "Begär offert" [ref=e17] [cursor=pointer]:
+          - /url: /offert
+        - button "Toggle menu" [ref=e18]:
+          - img
+    - list [ref=e21]:
+      - listitem [ref=e22]:
+        - link "Start" [ref=e23] [cursor=pointer]:
+          - /url: /
+      - listitem [ref=e24]:
+        - link "Tjänster" [ref=e25] [cursor=pointer]:
+          - /url: /#tjanster
+      - listitem [ref=e26]:
+        - link "Områden" [ref=e27] [cursor=pointer]:
+          - /url: /#omraden
+      - listitem [ref=e28]:
+        - link "Kontakt" [ref=e29] [cursor=pointer]:
+          - /url: /kontakt
+      - listitem [ref=e30]:
+        - link "Begär offert" [ref=e31] [cursor=pointer]:
+          - /url: /offert
+  - main [ref=e32]:
+    - navigation "Breadcrumb" [ref=e35]:
+      - list [ref=e36]:
+        - listitem [ref=e37]:
+          - link "Start" [ref=e38] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e39]:
+          - generic [ref=e40]: /
+          - generic [ref=e41]: Kontakt
+    - generic [ref=e44]:
+      - generic [ref=e45]:
+        - generic [ref=e46]: Kontakt
+        - heading "Prata med oss om din luftvärmepump" [level=1] [ref=e47]
+        - paragraph [ref=e48]: Behöver du rådgivning inför köp, vill boka service eller få hjälp med felsökning? Hör av dig så återkommer vi så snabbt vi kan.
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - heading "Ring" [level=2] [ref=e51]
+          - link "031-000 00 00" [ref=e52] [cursor=pointer]:
+            - /url: tel:0310000000
+        - generic [ref=e53]:
+          - heading "Mejla" [level=2] [ref=e54]
+          - link "info@hisingeluftvarme.se" [ref=e55] [cursor=pointer]:
+            - /url: mailto:info@hisingeluftvarme.se
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - generic [ref=e62]: Namn
+            - textbox "Namn" [ref=e63]:
+              - /placeholder: Ditt namn
+          - generic [ref=e64]:
+            - generic [ref=e65]: Telefon
+            - textbox "Telefon" [ref=e66]:
+              - /placeholder: Telefonnummer
+          - generic [ref=e67]:
+            - generic [ref=e68]: E-post
+            - textbox "E-post" [ref=e69]:
+              - /placeholder: info@hisingeluftvarme.se
+          - generic [ref=e70]:
+            - generic [ref=e71]: Meddelande
+            - textbox "Meddelande" [ref=e72]:
+              - /placeholder: Berätta kort vad du vill ha hjälp med.
+        - button "Skapa meddelande" [ref=e73] [cursor=pointer]
+      - complementary [ref=e74]:
+        - generic [ref=e75]:
+          - heading "Vi arbetar i" [level=2] [ref=e76]
+          - list [ref=e77]:
+            - listitem [ref=e78]: Göteborg
+            - listitem [ref=e79]: Borås
+            - listitem [ref=e80]: Alingsås
+            - listitem [ref=e81]: Trollhättan
+            - listitem [ref=e82]: Uddevalla
+        - generic [ref=e83]:
+          - heading "Vanliga ärenden" [level=2] [ref=e84]
+          - list [ref=e85]:
+            - listitem [ref=e86]: Offert inför ny installation
+            - listitem [ref=e87]: Planerad service av befintlig pump
+            - listitem [ref=e88]: Akut felsökning vid driftproblem
+  - contentinfo [ref=e89]:
+    - generic [ref=e90]:
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - heading "HISINGE LUFTVÄRME" [level=2] [ref=e93]
+          - paragraph [ref=e94]: Installation, service och felsökning för villaägare som vill ha lägre energikostnader och trygg drift året runt.
+          - generic [ref=e95]:
+            - paragraph [ref=e96]:
+              - link "031-000 00 00" [ref=e97] [cursor=pointer]:
+                - /url: tel:0310000000
+            - paragraph [ref=e98]:
+              - link "info@hisingeluftvarme.se" [ref=e99] [cursor=pointer]:
+                - /url: mailto:info@hisingeluftvarme.se
+        - generic [ref=e100]:
+          - generic [ref=e101]:
+            - heading "Tjänster" [level=4] [ref=e102]
+            - list [ref=e103]:
+              - listitem [ref=e104]:
+                - link "Installation" [ref=e105] [cursor=pointer]:
+                  - /url: /installation-luftvarmepump
+              - listitem [ref=e106]:
+                - link "Service" [ref=e107] [cursor=pointer]:
+                  - /url: /service-luftvarmepump
+              - listitem [ref=e108]:
+                - link "Felsökning" [ref=e109] [cursor=pointer]:
+                  - /url: /felsokning-luftvarmepump
+              - listitem [ref=e110]:
+                - link "Begär offert" [ref=e111] [cursor=pointer]:
+                  - /url: /offert
+          - generic [ref=e112]:
+            - heading "Områden" [level=4] [ref=e113]
+            - list [ref=e114]:
+              - listitem [ref=e115]:
+                - link "Göteborg" [ref=e116] [cursor=pointer]:
+                  - /url: /luftvarmepump-goteborg
+              - listitem [ref=e117]:
+                - link "Borås" [ref=e118] [cursor=pointer]:
+                  - /url: /luftvarmepump-boras
+              - listitem [ref=e119]:
+                - link "Alingsås" [ref=e120] [cursor=pointer]:
+                  - /url: /luftvarmepump-alingsas
+              - listitem [ref=e121]:
+                - link "Trollhättan" [ref=e122] [cursor=pointer]:
+                  - /url: /luftvarmepump-trollhattan
+              - listitem [ref=e123]:
+                - link "Uddevalla" [ref=e124] [cursor=pointer]:
+                  - /url: /luftvarmepump-uddevalla
+          - generic [ref=e125]:
+            - heading "Företaget" [level=4] [ref=e126]
+            - list [ref=e127]:
+              - listitem [ref=e128]:
+                - link "Kontakt" [ref=e129] [cursor=pointer]:
+                  - /url: /kontakt
+              - listitem [ref=e130]:
+                - link "Begär offert" [ref=e131] [cursor=pointer]:
+                  - /url: /offert
+      - generic [ref=e132]:
+        - paragraph [ref=e133]: © 2026 Hisinge Luftvärme. Alla rättigheter förbehållna.
+        - generic [ref=e135]: Västsverige
+  - generic [ref=e138]:
+    - button "Menu" [ref=e139]:
+      - img [ref=e141]
+      - generic: Menu
+    - button "Inspect" [ref=e145]:
+      - img [ref=e147]
+      - generic: Inspect
+    - button "Audit" [ref=e149]:
+      - img [ref=e151]
+      - generic: Audit
+    - button "Settings" [ref=e154]:
+      - img [ref=e156]
+      - generic: Settings

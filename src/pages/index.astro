@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import Container from '../components/Container.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import BenefitsSection from '../components/BenefitsSection.astro';
+import AreaCard from '../components/AreaCard.astro';
+import FAQSection from '../components/FAQSection.astro';
+import CTASection from '../components/CTASection.astro';
+import { SITE } from '../data/site';
+import { PRIORITY_AREAS } from '../data/areas';
+
+// SEO Metadata
+const title = "Luftvärmepumpar i Göteborg, Stenungsund och Lilla Edet";
+const description = "Hisingen Luftvärme hjälper kunder i Göteborg, Stenungsund och Lilla Edet med försäljning, installation, service och underhåll av luftvärmepumpar.";
+
+const services = [
+  {
+    eyebrow: "Hembesök",
+    title: "Kostnadsfria hembesök",
+    description: "Vi utför kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet för att hitta den bästa lösningen för ditt hus.",
+    link: "/kontakt",
+    image: "/images/hero.png",
+    imageAlt: "Hembesök inför val av luftvärmepump"
+  },
+  {
+    eyebrow: "Installation",
+    title: "Installation av luftvärmepump",
+    description: "Vår standardinstallation är utformad för att täcka de flesta installationer. Extra rör, kabel eller tillägg kan behövas beroende på förutsättningarna.",
+    link: "/installation-luftvarmepump",
+    image: "/images/service-installation.png",
+    imageAlt: "Installation av luftvärmepump i villa"
+  },
+  {
+    eyebrow: "Service",
+    title: "Service av luftvärmepump",
+    description: "En luftvärmepump bör servas med 2–3 års intervall för att säkerställa god effekt. Kontakta oss om pumpen beter sig konstigt eller visar felkod.",
+    link: "/service-luftvarmepump",
+    image: "/images/service-maintenance.png",
+    imageAlt: "Professionell service av luftvärmepump"
+  }
+];
+
+const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+const shieldIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`;
+const userIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`;
+const fileIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`;
+const clockIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
+const activityIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`;
+
+const trustBenefits = [
+  { title: "Kostnadsfritt hembesök", description: "Vi kommer ut i Göteborg, Stenungsund och Lilla Edet och ser över vilken lösning som passar huset.", icon: userIcon },
+  { title: "Trygg installation", description: "Standardinstallationen täcker de flesta installationer och tydliggör eventuella tillägg i förväg.", icon: shieldIcon },
+  { title: "ROT-avdrag på fakturan", description: "Vi gör ROT-avdraget direkt på fakturan och ansöker om ersättning från Skatteverket.", icon: fileIcon },
+  { title: "Lokal kontakt", description: "Du når oss på telefon eller e-post och vi hör oftast av oss inom 24 timmar.", icon: checkIcon }
+];
+
+const qualityBenefits = [
+  { title: "Optimerad effekt", description: "En rätt installerad och servad pump ger mer värme för pengarna.", icon: activityIcon },
+  { title: "Tydliga villkor", description: "Priser anges efter ROT-avdrag och inklusive standardinstallation där det gäller.", icon: fileIcon },
+  { title: "Service med rätt intervall", description: "Vi rekommenderar service med 2–3 års intervall för att säkerställa god effekt.", icon: shieldIcon },
+  { title: "Snabb kontakt", description: SITE.responseTime, icon: clockIcon }
+];
+
+const areas = PRIORITY_AREAS.map((area) => ({
+  name: area.name,
+  link: area.url,
+  description: `Luftvärmepump i ${area.name}`,
+}));
+
+const faqs = [
+  { 
+    question: "Erbjuder ni kostnadsfria hembesök?", 
+    answer: "Ja, vi utför kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet för att hitta den bästa lösningen för kundens hus." 
+  },
+  { 
+    question: "Vad ingår i priset för produkterna?", 
+    answer: "Produktpriserna anges efter ROT-avdrag och inklusive standardinstallation. Extra rör, kabel eller tillägg kan behövas beroende på förutsättningarna." 
+  },
+  { 
+    question: "Hur ofta bör en luftvärmepump servas?", 
+    answer: "En luftvärmepump bör servas med 2–3 års intervall för att säkerställa god effekt. Om pumpen beter sig konstigt eller visar felkod ska du kontakta oss." 
+  }
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <HeroSection 
+    eyebrow="Din lokala hjälp i Göteborg, Stenungsund och Lilla Edet"
+    title="Hisingen Luftvärme"
+    description={SITE.mainMessage}
+    primaryCTA={{ text: "Begär kostnadsfri offert", link: "/offert" }}
+    secondaryCTA={{ text: "Se våra produkter", link: "/produkter" }}
+    image="/images/hero.png"
+    imageAlt="Tekniker och kund vid luftvärmepump i ljust vardagsrum"
+    size="large"
+    showPills={true}
+  />
+
+  <BenefitsSection 
+    eyebrow="Varför välja oss?"
+    title="Vi är med hela vägen"
+    benefits={trustBenefits} 
+  />
+
+  <section id="tjanster" class="section-padding bg-black">
+    <Container>
+      <div class="section-header text-center">
+        <span class="eyebrow">Tjänster</span>
+        <h2 class="text-white">Vad vi kan hjälpa dig med</h2>
+        <p class="text-muted">Försäljning, installation, service och underhåll i Göteborg, Stenungsund och Lilla Edet.</p>
+      </div>
+      <div class="services-grid">
+        {services.map(service => (
+          <ServiceCard {...service} />
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <BenefitsSection 
+    eyebrow="Kvalitet"
+    title="Långsiktiga lösningar för ditt hem"
+    benefits={qualityBenefits} 
+  />
+
+  <section id="omraden" class="section-padding bg-gray">
+    <Container>
+      <div class="section-header text-center">
+        <span class="eyebrow">Lokalt</span>
+        <h2>Här finns vi</h2>
+        <p class="text-muted">Välj område för en specifik sida med lokal information, tjänster och offertväg.</p>
+      </div>
+      <div class="areas-grid">
+        {areas.map(area => (
+          <AreaCard {...area} />
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <FAQSection faqs={faqs} />
+
+  <CTASection 
+    title="Vill du boka hembesök?"
+    description="Fyll i dina kontaktuppgifter så hör vi av oss så snart vi har möjlighet. Vi hör oftast av oss inom 24 timmar."
+    buttonText="Få kostnadsfri offert"
+    buttonLink="/offert"
+  />
+</BaseLayout>
+
+<style>
+  .section-header {
+    margin-bottom: 5rem;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+    gap: 2rem;
+  }
+  .areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .section-header {
+      margin-bottom: 3rem;
+    }
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .areas-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

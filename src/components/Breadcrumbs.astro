@@ -1,0 +1,65 @@
+---
+import Container from './Container.astro';
+
+interface Crumb {
+  text: string;
+  link?: string;
+}
+
+interface Props {
+  crumbs: Crumb[];
+}
+
+const { crumbs } = Astro.props;
+---
+
+<div class="breadcrumbs-wrapper">
+  <Container>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <ol>
+        <li><a href="/">Start</a></li>
+        {crumbs.map((crumb, index) => (
+          <li>
+            <span class="separator">/</span>
+            {crumb.link && index < crumbs.length - 1 ? (
+              <a href={crumb.link}>{crumb.text}</a>
+            ) : (
+              <span aria-current="page">{crumb.text}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  </Container>
+</div>
+
+<style>
+  .breadcrumbs-wrapper {
+    padding: 1rem 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .breadcrumbs li {
+    display: flex;
+    align-items: center;
+  }
+  .separator {
+    margin: 0 0.75rem;
+    color: var(--border);
+  }
+  .breadcrumbs a:hover {
+    color: var(--secondary-hover);
+    text-decoration: underline;
+  }
+  [aria-current="page"] {
+    color: var(--text-main);
+    font-weight: 500;
+  }
+</style>

@@ -1,0 +1,60 @@
+---
+import Container from './Container.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+}
+
+const { title, description, buttonText, buttonLink } = Astro.props;
+---
+
+<section class="cta-section section-padding">
+  <Container>
+    <div class="cta-content">
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <a href={buttonLink} class="btn btn-primary btn-large">{buttonText}</a>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .cta-section {
+    background: var(--primary);
+    color: var(--white);
+    text-align: center;
+  }
+  .cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: clamp(2rem, 4vw, 3rem);
+    border: 1px solid rgba(247, 146, 46, 0.24);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(247, 146, 46, 0.07), rgba(255, 255, 255, 0.04));
+  }
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+  p {
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.74);
+    line-height: 1.7;
+  }
+  .btn-large {
+    padding: 1rem 1.6rem;
+    font-size: 0.95rem;
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--white);
+  }
+  .btn-large:hover {
+    background-color: var(--secondary-hover);
+    border-color: var(--secondary-hover);
+  }
+</style>

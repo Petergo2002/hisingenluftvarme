@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import Container from '../components/Container.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AreaCard from '../components/AreaCard.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import FAQSection from '../components/FAQSection.astro';
+import CTASection from '../components/CTASection.astro';
+import { AREA_LINKS, INSTALLATION_ADDONS, INSTALLATION_INCLUDED, ROT_TERMS, SITE } from '../data/site';
+
+const serviceName = "Installation av luftvärmepump";
+const title = "Installation av luftvärmepump | Hisingen Luftvärme";
+const description = "Installation av luftvärmepump i Göteborg, Stenungsund och Lilla Edet. Standardinstallation, rådgivning och ROT-avdrag för privatkunder.";
+
+const areas = AREA_LINKS;
+
+const otherServices = [
+  {
+    title: "Hembesök",
+    description: "Vi utför kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet för att hitta bästa lösningen för ditt hus.",
+    link: "/kontakt",
+    image: "/images/hero.png",
+    imageAlt: "Hembesök inför installation"
+  },
+  {
+    title: "Service av luftvärmepump",
+    description: "En luftvärmepump bör servas med 2–3 års intervall för att säkerställa god effekt.",
+    link: "/service-luftvarmepump",
+    image: "/images/service-maintenance.png",
+    imageAlt: "Professionell service av luftvärmepump"
+  }
+];
+
+const faqs = [
+  { question: "Vad ingår i en standardinstallation?", answer: "Standardinstallationen innehåller bland annat framkörning, väggkonsol, vibrationsdämpare, upp till 5 meter isolerade kopparrör, kabeldragning, plastkanal, håltagning, vakuumsugning, driftsättning och genomgång av fjärrkontrollen." },
+  { question: "Kan tillägg behövas?", answer: "Ja, extra rör, kabel eller andra tillägg kan behövas beroende på förutsättningarna. Exempel är markstativ, skyddstak, betonghåltagning eller arbete på höjd." },
+  { question: "Hur fungerar ROT-avdraget?", answer: "Hisingen Luftvärme gör avdraget direkt på fakturan och ansöker om ersättning från Skatteverket. Kunden ansvarar för att villkoren för ROT-avdrag är uppfyllda." }
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <Breadcrumbs crumbs={[{ text: "Tjänster" }, { text: serviceName }]} />
+
+  <HeroSection 
+    title={serviceName}
+    description="Vår standardinstallation är utformad för att täcka de flesta installationer. Extra rör, kabel eller tillägg kan behövas beroende på förutsättningarna."
+    primaryCTA={{ text: "Begär offert", link: "/offert" }}
+    image="/images/service-installation.png"
+    imageAlt="Installation av luftvärmepump utomhus"
+  />
+
+  <section class="section-padding">
+    <Container>
+      <div class="content-grid">
+        <div class="main-content">
+          <h2>Professionell hjälp från start till mål</h2>
+          <p>{SITE.mainMessage} Vi hjälper dig i Göteborg, Stenungsund och Lilla Edet och gör kostnadsfria hembesök för att hitta den bästa lösningen för ditt hus.</p>
+          
+          <h3>Vad ingår i vår installation?</h3>
+          <ul>
+            {INSTALLATION_INCLUDED.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding bg-light">
+    <Container>
+      <h2>Möjliga installationstillägg</h2>
+      <div class="needs-grid">
+        {INSTALLATION_ADDONS.map((item) => (
+          <div class="need-item">
+            <p>{item}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding">
+    <Container>
+      <h2>ROT-villkor</h2>
+      <div class="content-grid">
+        <div class="main-content">
+          <ul>
+            {ROT_TERMS.map((term) => <li>{term}</li>)}
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding bg-light">
+    <Container>
+      <h2>Vi installerar i våra tre områden</h2>
+      <div class="areas-grid">
+        {areas.map(area => (
+          <AreaCard {...area} />
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding">
+    <Container>
+      <h2>Andra tjänster vi erbjuder</h2>
+      <div class="services-grid">
+        {otherServices.map(service => (
+          <ServiceCard {...service} />
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <FAQSection faqs={faqs} />
+
+  <CTASection 
+    title="Redo att installera?"
+    description="Kontakta oss för en kostnadsfri offert eller ett hembesök i Göteborg, Stenungsund eller Lilla Edet."
+    buttonText="Begär offert nu"
+    buttonLink="/offert"
+  />
+</BaseLayout>
+
+<style>
+  .content-grid {
+    display: grid;
+    gap: 3rem;
+  }
+  .bg-light {
+    background: var(--bg-subtle);
+  }
+  .needs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .need-item {
+    background: var(--white);
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+  }
+  .need-item h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+  .main-content h2, .main-content h3 {
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  .main-content ul {
+    margin-top: 1.5rem;
+    list-style: disc;
+    padding-left: 1.5rem;
+  }
+  .main-content li {
+    margin-bottom: 0.75rem;
+  }
+  .areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+</style>

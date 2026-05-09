@@ -1,0 +1,177 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e4]:
+      - link "HISINGE LUFTVÄRME" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - list [ref=e6]:
+        - listitem [ref=e7]:
+          - link "Start" [ref=e8] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e9]:
+          - link "Tjänster" [ref=e10] [cursor=pointer]:
+            - /url: /#tjanster
+        - listitem [ref=e11]:
+          - link "Områden" [ref=e12] [cursor=pointer]:
+            - /url: /#omraden
+        - listitem [ref=e13]:
+          - link "Kontakt" [ref=e14] [cursor=pointer]:
+            - /url: /kontakt
+      - generic [ref=e15]:
+        - link "031-000 00 00" [ref=e16] [cursor=pointer]:
+          - /url: tel:0310000000
+        - link "Begär offert" [ref=e17] [cursor=pointer]:
+          - /url: /offert
+  - main [ref=e18]:
+    - navigation "Breadcrumb" [ref=e21]:
+      - list [ref=e22]:
+        - listitem [ref=e23]:
+          - link "Start" [ref=e24] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e25]:
+          - generic [ref=e26]: /
+          - generic [ref=e27]: Begär offert
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]: Offert
+        - heading "Begär offert" [level=1] [ref=e33]
+        - paragraph [ref=e34]: Beskriv ditt hem och vad du behöver hjälp med. Formuläret öppnar ett färdigt e-postutkast till oss så att du snabbt kan skicka din förfrågan.
+      - generic [ref=e35]:
+        - heading "Det här hjälper oss att ge rätt prisbild" [level=2] [ref=e36]
+        - list [ref=e37]:
+          - listitem [ref=e38]: Bostadstyp och ungefärlig storlek
+          - listitem [ref=e39]: Om du vill ha installation, service eller felsökning
+          - listitem [ref=e40]: Ort och önskat tidsspann
+          - listitem [ref=e41]: Eventuella symptom eller önskemål om modell
+    - generic [ref=e44]:
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - generic [ref=e48]: Namn
+            - textbox "Namn" [ref=e49]:
+              - /placeholder: Ditt namn
+          - generic [ref=e50]:
+            - generic [ref=e51]: Telefon
+            - textbox "Telefon" [ref=e52]:
+              - /placeholder: Telefonnummer
+          - generic [ref=e53]:
+            - generic [ref=e54]: E-post
+            - textbox "E-post" [ref=e55]:
+              - /placeholder: info@hisingeluftvarme.se
+          - generic [ref=e56]:
+            - generic [ref=e57]: Ort
+            - combobox "Ort" [ref=e58]:
+              - option "Välj område" [selected]
+              - option "Göteborg"
+              - option "Borås"
+              - option "Alingsås"
+              - option "Trollhättan"
+              - option "Uddevalla"
+          - generic [ref=e59]:
+            - generic [ref=e60]: Tjänst
+            - combobox "Tjänst" [ref=e61]:
+              - option "Välj tjänst" [selected]
+              - option "Installation"
+              - option "Service"
+              - option "Felsökning"
+              - option "Rådgivning"
+          - generic [ref=e62]:
+            - generic [ref=e63]: Bostadstyp
+            - combobox "Bostadstyp" [ref=e64]:
+              - option "Välj" [selected]
+              - option "Villa"
+              - option "Radhus"
+              - option "Fritidshus"
+              - option "Annat"
+          - generic [ref=e65]:
+            - generic [ref=e66]: Meddelande
+            - textbox "Meddelande" [ref=e67]:
+              - /placeholder: Beskriv ditt behov, ungefärlig boyta och eventuella frågor.
+        - button "Skapa offertförfrågan" [ref=e68] [cursor=pointer]
+      - complementary [ref=e69]:
+        - generic [ref=e70]:
+          - heading "Snabbaste vägen in" [level=2] [ref=e71]
+          - paragraph [ref=e72]: För akuta problem eller om du vill prata med en tekniker direkt kan du ringa eller mejla oss.
+          - link "031-000 00 00" [ref=e73] [cursor=pointer]:
+            - /url: tel:0310000000
+          - link "info@hisingeluftvarme.se" [ref=e74] [cursor=pointer]:
+            - /url: mailto:info@hisingeluftvarme.se
+        - generic [ref=e75]:
+          - heading "Våra arbetsområden" [level=2] [ref=e76]
+          - list [ref=e77]:
+            - listitem [ref=e78]: Göteborg
+            - listitem [ref=e79]: Borås
+            - listitem [ref=e80]: Alingsås
+            - listitem [ref=e81]: Trollhättan
+            - listitem [ref=e82]: Uddevalla
+  - contentinfo [ref=e83]:
+    - generic [ref=e84]:
+      - generic [ref=e85]:
+        - generic [ref=e86]:
+          - heading "HISINGE LUFTVÄRME" [level=2] [ref=e87]
+          - paragraph [ref=e88]: Installation, service och felsökning för villaägare som vill ha lägre energikostnader och trygg drift året runt.
+          - generic [ref=e89]:
+            - paragraph [ref=e90]:
+              - link "031-000 00 00" [ref=e91] [cursor=pointer]:
+                - /url: tel:0310000000
+            - paragraph [ref=e92]:
+              - link "info@hisingeluftvarme.se" [ref=e93] [cursor=pointer]:
+                - /url: mailto:info@hisingeluftvarme.se
+        - generic [ref=e94]:
+          - generic [ref=e95]:
+            - heading "Tjänster" [level=4] [ref=e96]
+            - list [ref=e97]:
+              - listitem [ref=e98]:
+                - link "Installation" [ref=e99] [cursor=pointer]:
+                  - /url: /installation-luftvarmepump
+              - listitem [ref=e100]:
+                - link "Service" [ref=e101] [cursor=pointer]:
+                  - /url: /service-luftvarmepump
+              - listitem [ref=e102]:
+                - link "Felsökning" [ref=e103] [cursor=pointer]:
+                  - /url: /felsokning-luftvarmepump
+              - listitem [ref=e104]:
+                - link "Begär offert" [ref=e105] [cursor=pointer]:
+                  - /url: /offert
+          - generic [ref=e106]:
+            - heading "Områden" [level=4] [ref=e107]
+            - list [ref=e108]:
+              - listitem [ref=e109]:
+                - link "Göteborg" [ref=e110] [cursor=pointer]:
+                  - /url: /luftvarmepump-goteborg
+              - listitem [ref=e111]:
+                - link "Borås" [ref=e112] [cursor=pointer]:
+                  - /url: /luftvarmepump-boras
+              - listitem [ref=e113]:
+                - link "Alingsås" [ref=e114] [cursor=pointer]:
+                  - /url: /luftvarmepump-alingsas
+              - listitem [ref=e115]:
+                - link "Trollhättan" [ref=e116] [cursor=pointer]:
+                  - /url: /luftvarmepump-trollhattan
+              - listitem [ref=e117]:
+                - link "Uddevalla" [ref=e118] [cursor=pointer]:
+                  - /url: /luftvarmepump-uddevalla
+          - generic [ref=e119]:
+            - heading "Företaget" [level=4] [ref=e120]
+            - list [ref=e121]:
+              - listitem [ref=e122]:
+                - link "Kontakt" [ref=e123] [cursor=pointer]:
+                  - /url: /kontakt
+              - listitem [ref=e124]:
+                - link "Begär offert" [ref=e125] [cursor=pointer]:
+                  - /url: /offert
+      - generic [ref=e126]:
+        - paragraph [ref=e127]: © 2026 Hisinge Luftvärme. Alla rättigheter förbehållna.
+        - generic [ref=e129]: Västsverige
+  - generic [ref=e132]:
+    - button "Menu" [ref=e133]:
+      - img [ref=e135]
+      - generic: Menu
+    - button "Inspect" [ref=e139]:
+      - img [ref=e141]
+      - generic: Inspect
+    - button "Audit" [ref=e143]:
+      - img [ref=e145]
+      - generic: Audit
+    - button "Settings" [ref=e148]:
+      - img [ref=e150]
+      - generic: Settings

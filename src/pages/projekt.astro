@@ -1,0 +1,511 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/Container.astro';
+import CTASection from '../components/CTASection.astro';
+import { SITE } from '../data/site';
+
+const title = `Våra Projekt | ${SITE.name}`;
+const description = "Se några av våra tidigare installationer av luftvärmepumpar i Göteborg, Stenungsund och Lilla Edet.";
+
+const projects = [
+  {
+    id: "cz25-sebastian-fihn",
+    title: "Installation av Panasonic CZ25",
+    location: "Göteborg",
+    year: "2025",
+    description: "En snygg och diskret installation av en Panasonic CZ25 luftvärmepump i en villa i Göteborg. Standardinstallation med rördragning längs fasad, optimal placering av inneenhet för maximal effekt och minimalt buller.",
+    image: "/Installerad%20CZ25%20-%20Sebastian%20Fihn.jpg",
+    imageAlt: "Installerad Panasonic CZ25 luftvärmepump",
+    tags: ["Installation", "Villa", "Panasonic CZ25"]
+  },
+  {
+    id: "service-luftvarmepump-lilla-edet",
+    title: "Service och underhåll av luftvärmepump",
+    location: "Lilla Edet",
+    year: "2025",
+    description: "Ett komplett servicebesök utfört på en äldre luftvärmepump i Lilla Edet för att säkerställa högsta möjliga effektivitet inför vintern. Vi rengjorde lamellerna noggrant, kontrollerade trycket och mätte upp optimal värmeeffekt.",
+    image: "/Dags%20att%20serva%20pumpen%20-%20Sebastian%20Fihn.jpg",
+    imageAlt: "Professionellt servicebesök av luftvärmepump",
+    tags: ["Service", "Underhåll", "Lilla Edet"]
+  }
+];
+---
+
+<BaseLayout title={title} description={description}>
+
+  <!-- Page hero header -->
+  <div class="page-header">
+    <Container>
+      <div class="header-content">
+        <span class="eyebrow">Referensprojekt</span>
+        <h1>Våra Projekt</h1>
+        <p class="lead">Stolt över varje installation vi utfört. Klicka på ett projekt för att se mer.</p>
+      </div>
+    </Container>
+  </div>
+
+  <!-- Project grid -->
+  <section class="section-padding bg-gray">
+    <Container>
+      <div class="projects-grid">
+        {projects.map(project => (
+          <button
+            class="project-card"
+            data-project={JSON.stringify(project)}
+            aria-label={`Visa detaljer om ${project.title}`}
+            id={`project-${project.id}`}
+          >
+            <div class="project-image-wrapper">
+              <img
+                src={project.image}
+                alt={project.imageAlt}
+                class="project-image"
+                loading="lazy"
+              />
+              <div class="project-overlay">
+                <div class="overlay-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                </div>
+                <span class="overlay-text">Visa projekt</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-tags">
+                {project.tags.map(tag => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+              <h2 class="project-title">{project.title}</h2>
+              <div class="project-meta">
+                <span class="meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  {project.location}
+                </span>
+                <span class="meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  {project.year}
+                </span>
+              </div>
+            </div>
+          </button>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Projektdetaljer" hidden>
+    <button class="lightbox-backdrop" id="lightbox-backdrop" aria-label="Stäng"></button>
+    <div class="lightbox-panel">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Stäng projekt">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <div class="lightbox-image-wrap">
+        <img class="lightbox-image" id="lightbox-image" src="" alt="" />
+      </div>
+
+      <div class="lightbox-info">
+        <div class="lightbox-tags" id="lightbox-tags"></div>
+        <h2 class="lightbox-title" id="lightbox-title"></h2>
+        <div class="lightbox-meta" id="lightbox-meta"></div>
+        <p class="lightbox-description" id="lightbox-description"></p>
+        <a href="/offert" class="btn btn-primary lightbox-cta">Begär kostnadsfri offert</a>
+      </div>
+    </div>
+  </div>
+
+  <CTASection 
+    title="Vill du också ha en snygg installation?"
+    description="Kontakta oss idag för ett kostnadsfritt hembesök. Vi hör av oss inom 24 timmar."
+    buttonText="Få kostnadsfri offert"
+    buttonLink="/offert"
+  />
+</BaseLayout>
+
+<style>
+  /* ─── Page Header ─── */
+  .page-header {
+    padding: 7rem 0 5rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--border-warm);
+  }
+  .header-content {
+    max-width: 700px;
+  }
+  .page-header h1 {
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    margin: 0.5rem 0 1.25rem;
+    color: var(--secondary);
+  }
+  .lead {
+    font-size: 1.2rem;
+    color: var(--text-muted, #666);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ─── Projects Grid ─── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2.5rem;
+  }
+
+  /* ─── Project Card ─── */
+  .project-card {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+    width: 100%;
+  }
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+  }
+  .project-card:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+  }
+
+  /* Image + overlay */
+  .project-image-wrapper {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: #f0ece8;
+  }
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.55s ease;
+  }
+  .project-card:hover .project-image {
+    transform: scale(1.07);
+  }
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.55));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    gap: 0.5rem;
+  }
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+  .overlay-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary);
+    backdrop-filter: blur(8px);
+    transform: scale(0.8);
+    transition: transform 0.3s ease 0.05s;
+  }
+  .project-card:hover .overlay-icon {
+    transform: scale(1);
+  }
+  .overlay-text {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+  }
+  .project-card:hover .overlay-text {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Card content */
+  .project-content {
+    padding: 1.75rem 2rem;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.875rem;
+  }
+  .tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.65rem;
+    background: var(--secondary-soft, #fff3e8);
+    color: var(--secondary);
+    border-radius: 100px;
+    border: 1px solid rgba(var(--secondary-rgb, 180, 90, 0), 0.15);
+  }
+  .project-title {
+    font-size: 1.35rem;
+    color: var(--secondary);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  .project-meta {
+    display: flex;
+    gap: 1.25rem;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.825rem;
+    color: var(--text-muted, #888);
+    font-weight: 500;
+  }
+
+  /* ─── Lightbox ─── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .lightbox[hidden] {
+    display: none;
+  }
+  .lightbox-backdrop {
+    all: unset;
+    position: absolute;
+    inset: 0;
+    background: rgba(12, 10, 8, 0.80);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    animation: fadeIn 0.25s ease;
+  }
+  .lightbox-panel {
+    position: relative;
+    z-index: 1;
+    background: var(--white);
+    border-radius: 18px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1000px;
+    width: 100%;
+    max-height: 90vh;
+    box-shadow: 0 40px 120px rgba(0,0,0,0.35);
+    animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .lightbox-image-wrap {
+    overflow: hidden;
+    background: #f0ece8;
+    max-height: 90vh;
+  }
+  .lightbox-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .lightbox-info {
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 90vh;
+  }
+  .lightbox-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+  .lightbox-title {
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    color: var(--secondary);
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+  .lightbox-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .lightbox-description {
+    color: var(--text-muted, #666);
+    line-height: 1.7;
+    margin: 0 0 2rem;
+    flex-grow: 1;
+  }
+  .lightbox-cta {
+    align-self: flex-start;
+  }
+  .lightbox-close {
+    all: unset;
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary);
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .lightbox-close:hover {
+    background: #fff;
+    transform: scale(1.1);
+  }
+  .lightbox-close:focus-visible {
+    outline: 3px solid var(--primary);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 900px) {
+    .lightbox-panel {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      max-height: 95vh;
+    }
+    .lightbox-image-wrap {
+      max-height: 45vw;
+      min-height: 220px;
+    }
+    .lightbox-info {
+      padding: 2rem 1.75rem;
+      max-height: none;
+    }
+  }
+  @media (max-width: 600px) {
+    .page-header {
+      padding: 5rem 0 3.5rem;
+    }
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+    .lightbox-image-wrap {
+      max-height: 52vw;
+    }
+    .lightbox-info {
+      padding: 1.5rem 1.25rem;
+    }
+    .lightbox-title {
+      font-size: 1.3rem;
+    }
+    .lightbox-description {
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
+<script>
+  // ─── Lightbox logic ───────────────────────────────────────────────────────
+  const lightbox     = document.getElementById('lightbox') as HTMLElement;
+  const lbBackdrop   = document.getElementById('lightbox-backdrop') as HTMLButtonElement;
+  const lbClose      = document.getElementById('lightbox-close') as HTMLButtonElement;
+  const lbImage      = document.getElementById('lightbox-image') as HTMLImageElement;
+  const lbTitle      = document.getElementById('lightbox-title') as HTMLElement;
+  const lbTags       = document.getElementById('lightbox-tags') as HTMLElement;
+  const lbMeta       = document.getElementById('lightbox-meta') as HTMLElement;
+  const lbDesc       = document.getElementById('lightbox-description') as HTMLElement;
+
+  let triggerButton: HTMLButtonElement | null = null;
+
+  // Open lightbox with project data
+  function openLightbox(card: HTMLButtonElement) {
+    const raw = card.getAttribute('data-project');
+    if (!raw) return;
+
+    const project = JSON.parse(raw);
+    triggerButton = card;
+
+    // Populate content
+    lbImage.src = project.image;
+    lbImage.alt = project.imageAlt;
+    lbTitle.textContent = project.title;
+
+    lbTags.innerHTML = project.tags
+      .map((t: string) => `<span class="tag">${t}</span>`)
+      .join('');
+
+    lbMeta.innerHTML = `
+      <span class="meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        ${project.location}
+      </span>
+      <span class="meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        ${project.year}
+      </span>
+    `;
+
+    lbDesc.textContent = project.description;
+
+    // Show modal
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+
+  // Close lightbox and restore focus
+  function closeLightbox() {
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+    if (triggerButton) {
+      triggerButton.focus();
+      triggerButton = null;
+    }
+  }
+
+  // Wire up all project cards
+  document.querySelectorAll<HTMLButtonElement>('.project-card').forEach(card => {
+    card.addEventListener('click', () => openLightbox(card));
+  });
+
+  // Close via backdrop and close button
+  lbBackdrop.addEventListener('click', closeLightbox);
+  lbClose.addEventListener('click', closeLightbox);
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && !lightbox.hidden) {
+      closeLightbox();
+    }
+  });
+</script>

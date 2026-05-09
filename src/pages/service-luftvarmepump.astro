@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import Container from '../components/Container.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AreaCard from '../components/AreaCard.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import FAQSection from '../components/FAQSection.astro';
+import CTASection from '../components/CTASection.astro';
+import { AREA_LINKS } from '../data/site';
+
+const serviceName = "Service av luftvärmepump";
+const title = "Service av luftvärmepump | Hisingen Luftvärme";
+const description = "Service av luftvärmepump i Göteborg, Stenungsund och Lilla Edet. Vi hjälper dig med bättre effekt, renare luft och längre livslängd.";
+
+const areas = AREA_LINKS;
+
+const otherServices = [
+  {
+    title: "Hembesök",
+    description: "Vi utför kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet för att hitta bästa lösningen för ditt hus.",
+    link: "/kontakt",
+    image: "/images/hero.png",
+    imageAlt: "Hembesök inför val av luftvärmepump"
+  },
+  {
+    title: "Installation av luftvärmepump",
+    description: "Standardinstallationen täcker de flesta installationer, men extra rör, kabel eller tillägg kan behövas.",
+    link: "/installation-luftvarmepump",
+    image: "/images/service-installation.png",
+    imageAlt: "Installation av luftvärmepump i villa"
+  }
+];
+
+const faqs = [
+  { question: "Hur ofta bör jag serva min luftvärmepump?", answer: "En luftvärmepump bör servas med 2–3 års intervall för att säkerställa god effekt." },
+  { question: "När ska jag kontakta er?", answer: "Kontakta oss om pumpen beter sig konstigt, visar felkod eller om du märker att effekten blivit sämre." },
+  { question: "Utför ni service i Göteborg, Stenungsund och Lilla Edet?", answer: "Ja, vi hjälper kunder i Göteborg, Stenungsund och Lilla Edet med service och underhåll." }
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <Breadcrumbs crumbs={[{ text: "Tjänster" }, { text: serviceName }]} />
+
+  <HeroSection 
+    title={serviceName}
+    description="En luftvärmepump bör servas med 2–3 års intervall för att säkerställa god effekt. Kontakta oss om pumpen beter sig konstigt eller visar felkod."
+    primaryCTA={{ text: "Boka service", link: "/offert" }}
+    image="/images/service-maintenance.png"
+    imageAlt="Tekniker utför service på inomhusdel"
+  />
+
+  <section class="section-padding">
+    <Container>
+      <div class="content-grid">
+        <div class="main-content">
+          <h2>Varför behövs regelbunden service?</h2>
+          <p>Regelbunden service hjälper luftvärmepumpen att behålla god effekt över tid. Vi rekommenderar service med 2–3 års intervall, och tidigare om pumpen beter sig konstigt eller visar felkod.</p>
+          
+          <h3>Kontakta oss om du märker:</h3>
+          <ul>
+            <li>Att pumpen värmer eller kyler sämre än vanligt.</li>
+            <li>Att pumpen låter konstigt eller beter sig annorlunda.</li>
+            <li>Att displayen visar en felkod.</li>
+            <li>Att det har gått 2–3 år sedan senaste service.</li>
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding bg-light">
+    <Container>
+      <h2>När är det dags?</h2>
+      <div class="needs-grid">
+        <div class="need-item">
+          <h3>Dålig effekt</h3>
+          <p>Om pumpen inte ger samma värme eller kyla som tidigare är det läge att boka service.</p>
+        </div>
+        <div class="need-item">
+          <h3>Felkod eller konstigt beteende</h3>
+          <p>Visar pumpen felkod, startar inte som vanligt eller beter sig konstigt ska du kontakta oss.</p>
+        </div>
+        <div class="need-item">
+          <h3>Serviceintervall</h3>
+          <p>Med service vartannat till vart tredje år hjälper du pumpen att behålla god effekt.</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding">
+    <Container>
+      <h2>Vi utför service i vårt område</h2>
+      <div class="areas-grid">
+        {areas.map(area => (
+          <AreaCard {...area} />
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding bg-light">
+    <Container>
+      <h2>Fler tjänster</h2>
+      <div class="services-grid">
+        {otherServices.map(service => (
+          <ServiceCard {...service} />
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <FAQSection faqs={faqs} />
+
+  <CTASection 
+    title="Dags för service?"
+    description="Boka service om det har gått 2–3 år sedan senast, eller om pumpen beter sig konstigt eller visar felkod."
+    buttonText="Boka service nu"
+    buttonLink="/offert"
+  />
+</BaseLayout>
+
+<style>
+  .content-grid {
+    display: grid;
+    gap: 3rem;
+  }
+  .bg-light {
+    background: var(--bg-subtle);
+  }
+  .needs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .need-item {
+    background: var(--white);
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+  }
+  .need-item h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+  .main-content h2, .main-content h3 {
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  .main-content ul {
+    margin-top: 1.5rem;
+    list-style: disc;
+    padding-left: 1.5rem;
+  }
+  .main-content li {
+    margin-bottom: 0.75rem;
+  }
+  .areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+</style>

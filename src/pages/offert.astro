@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/Container.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { AREA_LINKS, SITE } from '../data/site';
+
+const title = "Kontakt & Offert";
+const offerMailto = `${SITE.emailHref}?subject=Offertforfragan`;
+---
+
+<BaseLayout title={title}>
+  <Breadcrumbs crumbs={[{ text: title }]} />
+
+  <section class="section-padding bg-light">
+    <Container>
+      <div class="page-intro">
+        <div>
+          <span class="eyebrow">Kontakt</span>
+          <h1>Kontakta oss</h1>
+          <p class="lead">Fyll i dina uppgifter så hör vi av oss så snart vi kan — oftast inom 24 timmar. Du kan också ringa eller mejla oss direkt.</p>
+        </div>
+
+        <div class="intro-points surface">
+          <h2>Det här kan vi hjälpa dig med</h2>
+          <ul>
+            <li>Kostnadsfritt hembesök i Göteborg, Stenungsund och Lilla Edet</li>
+            <li>Försäljning och installation av luftvärmepump</li>
+            <li>Service och underhåll av befintlig pump</li>
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding">
+    <Container>
+      <div class="quote-layout">
+        <form class="surface quote-form" action={offerMailto} method="post" enctype="text/plain">
+          <div class="form-grid">
+            <label>
+              <span>Namn</span>
+              <input type="text" name="Namn" placeholder="Ditt namn" required />
+            </label>
+            <label>
+              <span>E-post</span>
+              <input type="email" name="E-post" placeholder={SITE.email} required />
+            </label>
+            <label>
+              <span>Telefon</span>
+              <input type="tel" name="Telefon" placeholder="Telefonnummer" required />
+            </label>
+            <label>
+              <span>Tjänst</span>
+              <select name="Tjänst" required>
+                <option value="">Välj tjänst</option>
+                <option value="Hembesök">Hembesök</option>
+                <option value="Installation">Installation</option>
+                <option value="Service">Service</option>
+                <option value="Underhåll">Underhåll</option>
+              </select>
+            </label>
+            <label>
+              <span>Område</span>
+              <select name="Område" required>
+                <option value="">Välj område</option>
+                {AREA_LINKS.map((area) => <option value={area.name}>{area.name}</option>)}
+              </select>
+            </label>
+            <label class="full-width">
+              <span>Vad kan vi hjälpa dig med?</span>
+              <textarea name="Vad kan vi hjälpa dig med?" placeholder="Beskriv kort vad du vill ha hjälp med." required></textarea>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Skapa offertförfrågan</button>
+        </form>
+
+        <aside class="quote-sidebar">
+          <div class="surface info-card">
+            <h2>Kontaktuppgifter</h2>
+            <p>Du kan också ringa eller mejla oss direkt.</p>
+            <a href={SITE.phoneHref} class="contact-link">{SITE.phoneDisplay}</a>
+            <a href={SITE.emailHref} class="contact-link">{SITE.email}</a>
+            <a href={SITE.addressHref} class="contact-link">{SITE.address}</a>
+          </div>
+
+          <div class="surface info-card">
+            <h2>Område</h2>
+            <ul class="area-list">
+              {AREA_LINKS.map((area) => <li>{area.name}</li>)}
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-intro,
+  .quote-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .lead {
+    max-width: 44rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .intro-points,
+  .quote-form,
+  .info-card {
+    padding: 2rem;
+  }
+
+  .intro-points h2,
+  .info-card h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .intro-points ul,
+  .area-list {
+    list-style: disc;
+    padding-left: 1.2rem;
+  }
+
+  .intro-points li,
+  .area-list li {
+    margin-bottom: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .quote-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .quote-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+
+  .quote-sidebar {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: block;
+    margin-top: 0.9rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .page-intro,
+    .quote-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

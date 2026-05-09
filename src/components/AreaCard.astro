@@ -1,0 +1,59 @@
+---
+interface Props {
+  name: string;
+  link: string;
+  description?: string;
+}
+
+const { name, link, description } = Astro.props;
+---
+
+<a href={link} class="area-card">
+  <span class="area-copy">
+    <strong>{name}</strong>
+    {description && <small>{description}</small>}
+  </span>
+  <span class="arrow">&rarr;</span>
+</a>
+
+<style>
+  .area-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.15rem 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-weight: 600;
+    min-height: 76px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .area-copy {
+    display: grid;
+    gap: 0.25rem;
+  }
+  .area-copy strong {
+    color: var(--text);
+  }
+  .area-copy small {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .area-card:hover {
+    border-color: var(--secondary);
+    color: var(--secondary-hover);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-2px);
+  }
+  .arrow {
+    flex: 0 0 auto;
+    transition: transform 0.2s;
+  }
+  .area-card:hover .arrow {
+    transform: translateX(5px);
+  }
+</style>

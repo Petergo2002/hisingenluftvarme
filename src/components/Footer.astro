@@ -1,0 +1,230 @@
+---
+import Container from './Container.astro';
+import { AREA_LINKS, SITE } from '../data/site';
+
+const footerLogos = [
+  {
+    src: "https://impro.usercontent.one/appid/oneComWsb/domain/hisingenluftvarme.se/media/hisingenluftvarme.se/onewebmedia/logga%20nordic%20cup%20(1).jpg?etag=W%2F%221a7c5-19b6ac57888%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=127%2B105&quality=85",
+    alt: "Nordic Cup",
+  },
+  {
+    src: "https://impro.usercontent.one/appid/oneComWsb/domain/hisingenluftvarme.se/media/hisingenluftvarme.se/onewebmedia/mitsubishi-electric-vector-logo.png?etag=W%2F%2216ab-19be509b3e8%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=182%2B182",
+    alt: "Mitsubishi Electric",
+  },
+  {
+    src: "https://impro.usercontent.one/appid/oneComWsb/domain/hisingenluftvarme.se/media/hisingenluftvarme.se/onewebmedia/Panasonic%20Logga.png?etag=W%2F%22119d9-19bdfe8ab30%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=205%2B65",
+    alt: "Panasonic",
+  },
+  {
+    src: "https://impro.usercontent.one/appid/oneComWsb/domain/hisingenluftvarme.se/media/hisingenluftvarme.se/onewebmedia/FUJITSU_logo_red.png?etag=W%2F%2274d5-19be5032c08%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=150%2B74",
+    alt: "Fujitsu",
+  },
+];
+---
+<footer class="footer">
+  <Container>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2 class="logo text-white">{SITE.name.toUpperCase()}</h2>
+        <p class="brand-desc">{SITE.mainMessage}</p>
+        <div class="footer-contact-info">
+          <p><a href={SITE.phoneHref}>{SITE.phoneDisplay}</a></p>
+          <p><a href={SITE.emailHref}>{SITE.email}</a></p>
+          <p><a href={SITE.addressHref}>{SITE.address}</a></p>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <div class="nav-col">
+          <h4>Tjänster</h4>
+          <ul>
+            <li><a href="/produkter">Produkter</a></li>
+            <li><a href="/projekt">Projekt</a></li>
+            <li><a href="/#tjanster">Hembesök</a></li>
+            <li><a href="/installation-luftvarmepump">Installation</a></li>
+            <li><a href="/service-luftvarmepump">Service</a></li>
+            <li><a href="/offert">Begär offert</a></li>
+          </ul>
+        </div>
+        <div class="nav-col">
+          <h4>Område</h4>
+          <ul>
+            {AREA_LINKS.map((area) => <li><a href={area.link}>{area.name}</a></li>)}
+          </ul>
+        </div>
+        <div class="nav-col">
+          <h4>Företaget</h4>
+          <ul>
+            <li><a href="/offert">Kontakt</a></li>
+            <li><a href="/offert">Begär offert</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="sponsor-strip">
+      <div class="sponsor-copy">
+        <p>Stolt sponsor av</p>
+        <span>2–6 januari 2026</span>
+      </div>
+      <div class="sponsor-logos" aria-label="Sponsorer och varumärken">
+        {footerLogos.map((logo) => (
+          <div class="sponsor-logo">
+            <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" />
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; {new Date().getFullYear()} Hisingen Luftvärme. Alla rättigheter förbehållna.</p>
+      <div class="legal-links">
+        <span>{SITE.area}</span>
+      </div>
+    </div>
+  </Container>
+</footer>
+
+<style>
+  .footer {
+    background: var(--primary);
+    color: var(--white);
+    padding: 5rem 0 2.5rem;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 4rem;
+    padding-bottom: 4rem;
+  }
+  .footer-brand {
+    max-width: 400px;
+  }
+  .logo {
+    font-size: 1.125rem;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.06em;
+  }
+  .brand-desc {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.66);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  .footer-contact-info p,
+  .footer-contact-info a {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.92);
+    margin-bottom: 0.5rem;
+  }
+  .footer-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  h4 {
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  ul li {
+    margin-bottom: 0.75rem;
+  }
+  ul li a {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.62);
+    transition: color 0.2s;
+  }
+  ul li a:hover {
+    color: var(--secondary);
+  }
+  .sponsor-strip {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .sponsor-copy {
+    min-width: 10rem;
+  }
+  .sponsor-copy p {
+    margin-bottom: 0.35rem;
+    color: var(--white);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .sponsor-copy span {
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.85rem;
+  }
+  .sponsor-logos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(112px, 1fr));
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+  .sponsor-logo {
+    min-width: 0;
+    height: 74px;
+    padding: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    border: 1px solid rgba(247, 146, 46, 0.22);
+    border-radius: 8px;
+  }
+  .sponsor-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .footer-bottom {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.45);
+  }
+  .legal-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  @media (max-width: 900px) {
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
+    .footer-nav {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    .sponsor-strip {
+      align-items: flex-start;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .sponsor-logos {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .sponsor-logos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .sponsor-logo {
+      height: 68px;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+  }
+</style>

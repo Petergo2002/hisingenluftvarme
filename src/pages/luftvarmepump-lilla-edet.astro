@@ -1,0 +1,8 @@
+---
+import LocalAreaPage from '../components/LocalAreaPage.astro';
+import { getPriorityArea } from '../data/areas';
+
+const area = getPriorityArea("lilla-edet");
+---
+
+<LocalAreaPage area={area} />

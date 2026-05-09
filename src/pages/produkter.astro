@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/Container.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CTASection from '../components/CTASection.astro';
+import { PRODUCTS } from '../data/site';
+
+const title = "Produkter";
+const description = "Luftvärmepumpar från Hisingen Luftvärme med pris efter ROT-avdrag och inklusive standardinstallation.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Breadcrumbs crumbs={[{ text: title }]} />
+
+  <section class="section-padding bg-light">
+    <Container>
+      <div class="section-header text-center">
+        <span class="eyebrow">Produkter</span>
+        <h1>Luftvärmepumpar med installation</h1>
+        <p class="text-muted">Alla priser visas efter ROT-avdrag och inklusive standardinstallation.</p>
+      </div>
+
+      <div class="products-grid">
+        {PRODUCTS.map((product) => (
+          <article class="surface product-card">
+            <div>
+              <h2>{product.name}</h2>
+              <p class="price">{product.price}</p>
+              <p class="price-note">Pris efter ROT-avdrag, inklusive standardinstallation.</p>
+            </div>
+            <ul>
+              {product.specs.map((spec) => <li>{spec}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <CTASection
+    title="Osäker på vilken modell som passar?"
+    description="Vi gör kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet och hjälper dig att hitta den bästa lösningen för ditt hus."
+    buttonText="Boka hembesök"
+    buttonLink="/offert"
+  />
+</BaseLayout>
+
+<style>
+  .bg-light {
+    background: var(--bg-subtle);
+  }
+  .section-header {
+    margin-bottom: 4rem;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 1.5rem;
+  }
+  .product-card {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .product-card h2 {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+  }
+  .price {
+    color: var(--secondary-hover);
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 0.25rem;
+  }
+  .price-note {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .product-card ul {
+    list-style: disc;
+    padding-left: 1.2rem;
+  }
+  .product-card li {
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+  }
+</style>

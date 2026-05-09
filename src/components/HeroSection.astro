@@ -1,0 +1,273 @@
+---
+import Container from './Container.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  primaryCTA: { text: string; link: string };
+  secondaryCTA?: { text: string; link: string };
+  image?: string;
+  imageAlt?: string;
+  size?: 'large' | 'medium';
+  showPills?: boolean;
+}
+
+const { 
+  eyebrow, 
+  title, 
+  description, 
+  primaryCTA, 
+  secondaryCTA, 
+  image, 
+  imageAlt = "",
+  size = 'large',
+  showPills = false
+} = Astro.props;
+---
+
+<section class={`hero size-${size} ${image ? 'has-image' : 'no-image'}`}>
+  {image && (
+    <div class="hero-bg">
+      <img src={image} alt={imageAlt} class="bg-image" />
+      <div class="bg-overlay"></div>
+    </div>
+  )}
+  <div class="hero-container">
+    <Container>
+      <div class="hero-content">
+        {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+        <h1>{title}</h1>
+        <p class="description">{description}</p>
+        <div class="actions">
+          <a href={primaryCTA.link} class="btn-premium primary">{primaryCTA.text}</a>
+          {secondaryCTA && <a href={secondaryCTA.link} class="btn-premium secondary">{secondaryCTA.text}</a>}
+        </div>
+        {showPills && (
+          <div class="trust-pills">
+            <span class="pill">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              För privatkunder
+            </span>
+            <span class="pill">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              ROT-avdrag
+            </span>
+            <span class="pill">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 9.36l-7.1 7.1a1 1 0 0 1-1.4 0l-2.8-2.8a1 1 0 0 1 0-1.4l7.1-7.1a6 6 0 0 1 9.36-7.94l-3.77 3.77a1 1 0 0 0 0 1.4z"></path></svg>
+              Installation och service
+            </span>
+            <span class="pill">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Göteborg, Stenungsund & Lilla Edet
+            </span>
+          </div>
+        )}
+      </div>
+    </Container>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: stretch;
+    background-color: #050505;
+    color: var(--white);
+    overflow: hidden;
+  }
+  
+  .size-large {
+    min-height: min(920px, calc(100svh - 78px));
+    padding: clamp(5rem, 10vw, 8rem) 0;
+  }
+  
+  .size-medium {
+    min-height: min(680px, calc(72svh - 78px));
+    padding: clamp(4.5rem, 8vw, 6rem) 0;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    animation: slowZoom 30s ease-in-out infinite alternate;
+  }
+
+  @keyframes slowZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+  }
+
+  .bg-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(100deg, rgba(0, 0, 0, 0.84) 5%, rgba(0, 0, 0, 0.58) 45%, rgba(0, 0, 0, 0.74) 100%),
+      radial-gradient(circle at 75% 20%, rgba(255, 255, 255, 0.08), transparent 45%);
+    z-index: 2;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-container :global(.container) {
+    width: 100%;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0;
+  }
+
+  .eyebrow {
+    color: var(--white);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  h1 {
+    color: var(--white);
+    margin-bottom: 1.25rem;
+    font-size: clamp(2.85rem, 6vw, 5.5rem);
+    line-height: 0.98;
+    font-weight: 800;
+    text-wrap: balance;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.38);
+  }
+
+  .description {
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    color: rgba(255, 255, 255, 0.86);
+    margin-bottom: 2rem;
+    line-height: 1.65;
+    max-width: 40rem;
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-premium {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.6rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 6px;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .btn-premium.primary {
+    background-color: var(--secondary);
+    color: var(--white);
+    box-shadow: 0 18px 40px rgba(247, 146, 46, 0.28);
+  }
+
+  .btn-premium.primary:hover {
+    transform: translateY(-2px);
+    background-color: var(--secondary-hover);
+  }
+
+  .btn-premium.secondary {
+    background: rgba(247, 146, 46, 0.12);
+    color: var(--white);
+    border: 1px solid rgba(247, 146, 46, 0.45);
+  }
+
+  .btn-premium.secondary:hover {
+    background: rgba(247, 146, 46, 0.2);
+    border-color: rgba(247, 146, 46, 0.7);
+    transform: translateY(-2px);
+  }
+
+  .trust-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-start;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(247, 146, 46, 0.28);
+    padding: 0.7rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .pill:hover {
+    background: rgba(247, 146, 46, 0.14);
+    border-color: rgba(247, 146, 46, 0.52);
+  }
+
+  @media (max-width: 768px) {
+    .size-large {
+      min-height: auto;
+      padding: 3.5rem 0 4rem;
+    }
+
+
+
+    h1 {
+      font-size: clamp(2.35rem, 10vw, 3.25rem);
+    }
+    .actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 1rem;
+    }
+    .btn-premium {
+      width: 100%;
+    }
+    .trust-pills {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+    .pill {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+</style>
