@@ -55,16 +55,25 @@ const description = "Luftvärmepumpar från Hisingen Luftvärme med pris efter R
   .text-center {
     text-align: center;
   }
+  .section-header h1,
+  .section-header p,
+  .product-card h2,
+  .product-card li,
+  .price-note {
+    overflow-wrap: anywhere;
+  }
   .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     gap: 1.5rem;
+    align-items: stretch;
   }
   .product-card {
     padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    min-width: 0;
   }
   .product-card h2 {
     font-size: 1.35rem;
@@ -89,5 +98,34 @@ const description = "Luftvärmepumpar från Hisingen Luftvärme med pris efter R
     color: var(--text-muted);
     margin-bottom: 0.6rem;
     line-height: 1.5;
+  }
+
+  @media (max-width: 640px) {
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header h1 {
+      font-size: clamp(2rem, 10vw, 2.75rem);
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .product-card {
+      padding: 1.5rem;
+      gap: 1.25rem;
+    }
+
+    .product-card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .price {
+      font-size: 1.45rem;
+    }
   }
 </style>
