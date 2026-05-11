@@ -16,7 +16,8 @@ const projects = [
     description: "En snygg och diskret installation av en Panasonic CZ25 luftvärmepump i en villa i Göteborg. Standardinstallation med rördragning längs fasad, optimal placering av inneenhet för maximal effekt och minimalt buller.",
     image: "/Installerad%20CZ25%20-%20Sebastian%20Fihn.jpg",
     imageAlt: "Installerad Panasonic CZ25 luftvärmepump",
-    tags: ["Installation", "Villa", "Panasonic CZ25"]
+    tags: ["Installation", "Villa", "Panasonic CZ25"],
+    objectPosition: "center 80%"
   },
   {
     id: "service-luftvarmepump-lilla-edet",
@@ -61,6 +62,7 @@ const projects = [
                 alt={project.imageAlt}
                 class="project-image"
                 loading="lazy"
+                style={project.objectPosition ? `object-position: ${project.objectPosition};` : undefined}
               />
               <div class="project-overlay">
                 <div class="overlay-icon">
@@ -458,6 +460,7 @@ const projects = [
     // Populate content
     lbImage.src = project.image;
     lbImage.alt = project.imageAlt;
+    lbImage.style.objectPosition = project.objectPosition || 'center';
     lbTitle.textContent = project.title;
 
     lbTags.innerHTML = project.tags
