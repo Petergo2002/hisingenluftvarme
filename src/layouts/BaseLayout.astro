@@ -7,21 +7,131 @@ import { SITE } from '../data/site';
 interface Props {
   title: string;
   description?: string;
+  canonicalPath?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description = "Hisingen Luftvärme hjälper kunder i Göteborg, Stenungsund och Lilla Edet med försäljning, installation, service och underhåll av luftvärmepumpar." } = Astro.props;
+const {
+  title,
+  description = SITE.defaultDescription,
+  canonicalPath,
+  image = SITE.defaultImage,
+  imageAlt = "Hisingen Luftvärme installerar och servar luftvärmepumpar",
+  type = "website",
+  noindex = false,
+  structuredData = [],
+} = Astro.props;
+
 const pageTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
+const normalizePath = (path: string) => {
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  return cleanPath === "/" ? cleanPath : cleanPath.replace(/\/$/, "");
+};
+const absoluteUrl = (path: string) => new URL(path, SITE.url).toString();
+const canonicalUrl = absoluteUrl(normalizePath(canonicalPath ?? Astro.url.pathname));
+const imageUrl = absoluteUrl(image);
+const robotsContent = noindex ? "noindex, follow" : "index, follow, max-image-preview:large";
+const extraStructuredData = Array.isArray(structuredData) ? structuredData : [structuredData];
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HVACBusiness",
+      "@id": `${SITE.url}/#business`,
+      name: SITE.name,
+      url: SITE.url,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl(SITE.logo),
+      },
+      image: imageUrl,
+      telephone: "+46766443438",
+      email: SITE.email,
+      priceRange: "$$",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Hildedalsgatan 200",
+        postalCode: "417 05",
+        addressLocality: "Göteborg",
+        addressCountry: "SE",
+      },
+      areaServed: ["Göteborg", "Stenungsund", "Lilla Edet"].map((name) => ({
+        "@type": "City",
+        name,
+      })),
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+46766443438",
+        contactType: "customer service",
+        areaServed: "SE",
+        availableLanguage: ["sv"],
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      url: SITE.url,
+      name: SITE.name,
+      description: SITE.defaultDescription,
+      inLanguage: SITE.language,
+      publisher: {
+        "@id": `${SITE.url}/#business`,
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: pageTitle,
+      description,
+      isPartOf: {
+        "@id": `${SITE.url}/#website`,
+      },
+      about: {
+        "@id": `${SITE.url}/#business`,
+      },
+      inLanguage: SITE.language,
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: imageUrl,
+      },
+    },
+    ...extraStructuredData,
+  ],
+};
 ---
 
 <!doctype html>
-<html lang="sv">
+<html lang={SITE.language}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/Namnlös design copy.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content={robotsContent} />
+    <meta name="theme-color" content="#111111" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
   </head>
   <body>
     <Header />

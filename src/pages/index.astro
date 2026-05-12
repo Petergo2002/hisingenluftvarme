@@ -19,7 +19,7 @@ const services = [
     eyebrow: "Hembesök",
     title: "Kostnadsfria hembesök",
     description: "Vi utför kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet för att hitta den bästa lösningen för ditt hus.",
-    link: "/kontakt",
+    link: "/offert",
     image: "/images/hero.png",
     imageAlt: "Hembesök inför val av luftvärmepump"
   },
@@ -68,6 +68,25 @@ const areas = PRIORITY_AREAS.map((area) => ({
   description: `Luftvärmepump i ${area.name}`,
 }));
 
+const serviceListSchema = {
+  "@type": "ItemList",
+  name: "Tjänster från Hisingen Luftvärme",
+  itemListElement: services.map((service, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Service",
+      name: service.title,
+      description: service.description,
+      url: new URL(service.link, SITE.url).toString(),
+      provider: {
+        "@id": `${SITE.url}/#business`,
+      },
+      areaServed: SITE.area,
+    },
+  })),
+};
+
 const faqs = [
   { 
     question: "Erbjuder ni kostnadsfria hembesök?", 
@@ -84,7 +103,7 @@ const faqs = [
 ];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image="/images/hero.png" structuredData={serviceListSchema}>
   <HeroSection 
     eyebrow="Din lokala hjälp i Göteborg, Stenungsund och Lilla Edet"
     title="Hisingen Luftvärme"

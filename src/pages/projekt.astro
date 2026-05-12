@@ -30,9 +30,32 @@ const projects = [
     tags: ["Service", "Underhåll", "Lilla Edet"]
   }
 ];
+
+const projectListSchema = {
+  "@type": "ItemList",
+  name: "Referensprojekt för luftvärmepumpar",
+  itemListElement: projects.map((project, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "CreativeWork",
+      name: project.title,
+      description: project.description,
+      locationCreated: {
+        "@type": "Place",
+        name: project.location,
+      },
+      image: new URL(project.image, SITE.url).toString(),
+      dateCreated: project.year,
+      provider: {
+        "@id": `${SITE.url}/#business`,
+      },
+    },
+  })),
+};
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image="/Installerad%20CZ25%20-%20Sebastian%20Fihn.jpg" structuredData={projectListSchema}>
 
   <!-- Page hero header -->
   <div class="page-header">

@@ -1,5 +1,6 @@
 ---
 import Container from './Container.astro';
+import { SITE } from '../data/site';
 
 interface Crumb {
   text: string;
@@ -11,6 +12,22 @@ interface Props {
 }
 
 const { crumbs } = Astro.props;
+const allCrumbs = [{ text: "Start", link: "/" }, ...crumbs];
+const currentPath = Astro.url.pathname;
+const absoluteUrl = (path: string) => new URL(path, SITE.url).toString();
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: allCrumbs.map((crumb, index) => {
+    const path = crumb.link ?? (index === allCrumbs.length - 1 ? currentPath : "");
+    return {
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.text,
+      ...(path ? { item: absoluteUrl(path) } : {}),
+    };
+  }),
+};
 ---
 
 <div class="breadcrumbs-wrapper">
@@ -18,19 +35,26 @@ const { crumbs } = Astro.props;
     <nav aria-label="Breadcrumb" class="breadcrumbs">
       <ol>
         <li><a href="/">Start</a></li>
-        {crumbs.map((crumb, index) => (
+        {crumbs.map((crumb, index) => {
+          const isCurrent = index === crumbs.length - 1;
+
+          return (
           <li>
             <span class="separator">/</span>
-            {crumb.link && index < crumbs.length - 1 ? (
+            {crumb.link && !isCurrent ? (
               <a href={crumb.link}>{crumb.text}</a>
-            ) : (
+            ) : isCurrent ? (
               <span aria-current="page">{crumb.text}</span>
+            ) : (
+              <span>{crumb.text}</span>
             )}
           </li>
-        ))}
+          );
+        })}
       </ol>
     </nav>
   </Container>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 </div>
 
 <style>

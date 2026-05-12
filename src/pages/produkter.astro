@@ -3,13 +3,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/Container.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CTASection from '../components/CTASection.astro';
-import { PRODUCTS } from '../data/site';
+import { PRODUCTS, SITE } from '../data/site';
 
 const title = "Produkter";
 const description = "Luftvärmepumpar från Hisingen Luftvärme med pris efter ROT-avdrag och inklusive standardinstallation.";
+const productListSchema = {
+  "@type": "ItemList",
+  name: "Luftvärmepumpar med installation",
+  itemListElement: PRODUCTS.map((product, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Product",
+      name: product.name,
+      description: product.specs.join(", "),
+      category: "Luftvärmepump",
+      brand: {
+        "@type": "Brand",
+        name: product.name.split(" ")[0],
+      },
+      offers: {
+        "@type": "Offer",
+        price: product.price.replace(/\D/g, ""),
+        priceCurrency: "SEK",
+        availability: "https://schema.org/InStock",
+        url: new URL("/produkter", SITE.url).toString(),
+        seller: {
+          "@id": `${SITE.url}/#business`,
+        },
+      },
+    },
+  })),
+};
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image="/images/service-installation.png" structuredData={productListSchema}>
   <Breadcrumbs crumbs={[{ text: title }]} />
 
   <section class="section-padding bg-light">

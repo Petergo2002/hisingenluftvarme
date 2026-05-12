@@ -5,10 +5,20 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { AREA_LINKS, SITE } from '../data/site';
 
 const title = "Kontakt & Offert";
+const description = "Kontakta Hisingen Luftvärme för kostnadsfri offert, hembesök, installation eller service av luftvärmepump i Göteborg, Stenungsund och Lilla Edet.";
 const offerMailto = `${SITE.emailHref}?subject=Offertforfragan`;
+const contactPageSchema = {
+  "@type": "ContactPage",
+  name: title,
+  description,
+  url: new URL("/offert", SITE.url).toString(),
+  mainEntity: {
+    "@id": `${SITE.url}/#business`,
+  },
+};
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} description={description} structuredData={contactPageSchema}>
   <Breadcrumbs crumbs={[{ text: title }]} />
 
   <section class="section-padding bg-light">

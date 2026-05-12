@@ -9,6 +9,7 @@ import FAQSection from './FAQSection.astro';
 import CTASection from './CTASection.astro';
 import SplitImageSection from './SplitImageSection.astro';
 import { getNearbyAreas, type PriorityArea } from '../data/areas';
+import { SITE } from '../data/site';
 
 interface Props {
   area: PriorityArea;
@@ -16,12 +17,26 @@ interface Props {
 
 const { area } = Astro.props;
 const nearbyAreas = getNearbyAreas(area);
+const localServiceSchema = {
+  "@type": "Service",
+  name: `Luftvärmepump i ${area.name}`,
+  serviceType: "Installation, service och felsökning av luftvärmepump",
+  description: area.description,
+  provider: {
+    "@id": `${SITE.url}/#business`,
+  },
+  areaServed: {
+    "@type": "City",
+    name: area.name,
+  },
+  url: new URL(area.url, SITE.url).toString(),
+};
 
 const services = [
   {
     title: "Kostnadsfritt hembesök",
     description: `Vi går igenom huset i ${area.name} och tar fram en lösning som passar bostadens behov.`,
-    link: "/kontakt",
+    link: "/offert",
     image: "/images/hero.png",
     imageAlt: `Hembesök inför luftvärmepump i ${area.name}`,
   },
@@ -49,7 +64,7 @@ const services = [
 ];
 ---
 
-<BaseLayout title={area.title} description={area.description}>
+<BaseLayout title={area.title} description={area.description} image="/images/hero.png" structuredData={localServiceSchema}>
   <Breadcrumbs crumbs={[{ text: "Områden" }, { text: area.name }]} />
 
   <HeroSection
@@ -112,6 +127,42 @@ const services = [
     </Container>
   </section>
 
+  <section class="section-padding bg-light">
+    <Container>
+      <div class="local-content-layout">
+        <div class="local-copy">
+          <span class="eyebrow">Lokalt</span>
+          <h2>{area.localConditionsTitle}</h2>
+          {area.localConditions.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+
+        <aside class="place-panel">
+          <h3>{area.neighborhoodsTitle}</h3>
+          <div class="place-list" aria-label={`Områden för luftvärmepump i ${area.name}`}>
+            {area.neighborhoods.map((place) => <span>{place}</span>)}
+          </div>
+        </aside>
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding">
+    <Container>
+      <div class="section-header">
+        <span class="eyebrow">Rådgivning</span>
+        <h2>{area.fitTitle}</h2>
+      </div>
+      <div class="detail-grid">
+        {area.fitItems.map((item) => (
+          <article class="detail-card">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
   <SplitImageSection
     title={`Prisförslag för luftvärmepump i ${area.name}`}
     description="Vi hjälper dig att jämföra rätt modell, installationsförutsättningar och ROT-avdrag innan du bestämmer dig."
@@ -120,6 +171,23 @@ const services = [
     image="/images/service-installation.png"
     imageAlt={`Prisförslag för luftvärmepump i ${area.name}`}
   />
+
+  <section class="section-padding">
+    <Container>
+      <div class="section-header">
+        <span class="eyebrow">Behov</span>
+        <h2>{area.situationTitle}</h2>
+      </div>
+      <div class="situation-list">
+        {area.situations.map((situation) => (
+          <article class="situation-item">
+            <h3>{situation.title}</h3>
+            <p>{situation.text}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
 
   <section class="section-padding bg-light">
     <Container>
@@ -168,22 +236,72 @@ const services = [
   }
 
   .intro-layout p,
-  .local-note p {
+  .local-note p,
+  .local-copy p,
+  .place-panel p,
+  .detail-card p,
+  .situation-item p {
     color: var(--text-muted);
     line-height: 1.75;
   }
 
   .local-note,
-  .benefit-item {
+  .benefit-item,
+  .place-panel,
+  .detail-card,
+  .situation-item {
     background: var(--white);
     border: 1px solid var(--border);
     padding: 2rem;
   }
 
   .local-note h3,
-  .benefit-item h3 {
+  .benefit-item h3,
+  .place-panel h3,
+  .detail-card h3,
+  .situation-item h3 {
     font-size: 1.15rem;
     margin-bottom: 0.75rem;
+  }
+
+  .local-content-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .local-copy {
+    max-width: 760px;
+  }
+
+  .local-copy h2 {
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .local-copy p + p {
+    margin-top: 1rem;
+  }
+
+  .place-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1rem;
+  }
+
+  .place-list span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--border-warm);
+    border-radius: 999px;
+    background: var(--secondary-soft);
+    color: var(--secondary);
+    font-size: 0.88rem;
+    font-weight: 800;
   }
 
   .section-header {
@@ -201,10 +319,23 @@ const services = [
     gap: 2rem;
   }
 
-  .benefits-grid {
+  .benefits-grid,
+  .detail-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
+  }
+
+  .situation-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .situation-item {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.35fr) minmax(0, 0.65fr);
+    gap: 1.5rem;
+    align-items: start;
   }
 
   .areas-grid {
@@ -215,7 +346,10 @@ const services = [
 
   @media (max-width: 820px) {
     .intro-layout,
-    .benefits-grid {
+    .local-content-layout,
+    .benefits-grid,
+    .detail-grid,
+    .situation-item {
       grid-template-columns: 1fr;
     }
   }

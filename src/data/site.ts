@@ -1,6 +1,12 @@
 export const SITE = {
   name: "Hisingen Luftvärme",
+  url: "https://hisingenluftvarme.se",
+  locale: "sv_SE",
+  language: "sv-SE",
   brandLine: "Försäljning, installation, service och underhåll",
+  defaultDescription: "Hisingen Luftvärme hjälper kunder i Göteborg, Stenungsund och Lilla Edet med försäljning, installation, service och underhåll av luftvärmepumpar.",
+  defaultImage: "/images/hero.png",
+  logo: "/hisingen_luftv%C3%A4rme_logo%20-%20Sebastian%20Fihn.png",
   mainMessage: "Försäljning, installation, service och underhåll - vi är med hela vägen.",
   area: "Göteborg, Stenungsund och Lilla Edet",
   phoneDisplay: "0766 44 34 38",
