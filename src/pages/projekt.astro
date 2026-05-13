@@ -130,7 +130,7 @@ const projectListSchema = {
         <img class="lightbox-image" id="lightbox-image" src="" alt="" />
       </div>
 
-      <div class="lightbox-info">
+      <div class="lightbox-info" id="lightbox-info">
         <div class="lightbox-tags" id="lightbox-tags"></div>
         <h2 class="lightbox-title" id="lightbox-title"></h2>
         <div class="lightbox-meta" id="lightbox-meta"></div>
@@ -312,6 +312,9 @@ const projectListSchema = {
     align-items: center;
     justify-content: center;
     padding: 1rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
   .lightbox[hidden] {
     display: none;
@@ -337,6 +340,7 @@ const projectListSchema = {
     max-width: 1000px;
     width: 100%;
     max-height: 90vh;
+    margin: auto;
     box-shadow: 0 40px 120px rgba(0,0,0,0.35);
     animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
@@ -357,6 +361,7 @@ const projectListSchema = {
     flex-direction: column;
     overflow-y: auto;
     max-height: 90vh;
+    overscroll-behavior: contain;
   }
   .lightbox-tags {
     display: flex;
@@ -422,10 +427,14 @@ const projectListSchema = {
 
   /* ─── Responsive ─── */
   @media (max-width: 900px) {
+    .lightbox {
+      align-items: flex-start;
+      padding: max(0.75rem, env(safe-area-inset-top)) 0.75rem max(1rem, env(safe-area-inset-bottom));
+    }
     .lightbox-panel {
       grid-template-columns: 1fr;
       grid-template-rows: auto 1fr;
-      max-height: 95vh;
+      max-height: none;
     }
     .lightbox-image-wrap {
       max-height: 45vw;
@@ -434,6 +443,7 @@ const projectListSchema = {
     .lightbox-info {
       padding: 2rem 1.75rem;
       max-height: none;
+      overflow-y: visible;
     }
   }
   @media (max-width: 600px) {
@@ -445,7 +455,8 @@ const projectListSchema = {
       gap: 1.75rem;
     }
     .lightbox-image-wrap {
-      max-height: 52vw;
+      max-height: min(52vw, 260px);
+      min-height: 180px;
     }
     .lightbox-info {
       padding: 1.5rem 1.25rem;
@@ -465,6 +476,7 @@ const projectListSchema = {
   const lbBackdrop   = document.getElementById('lightbox-backdrop') as HTMLButtonElement;
   const lbClose      = document.getElementById('lightbox-close') as HTMLButtonElement;
   const lbImage      = document.getElementById('lightbox-image') as HTMLImageElement;
+  const lbInfo       = document.getElementById('lightbox-info') as HTMLElement;
   const lbTitle      = document.getElementById('lightbox-title') as HTMLElement;
   const lbTags       = document.getElementById('lightbox-tags') as HTMLElement;
   const lbMeta       = document.getElementById('lightbox-meta') as HTMLElement;
@@ -506,6 +518,8 @@ const projectListSchema = {
     // Show modal
     lightbox.hidden = false;
     document.body.style.overflow = 'hidden';
+    lightbox.scrollTop = 0;
+    lbInfo.scrollTop = 0;
     lbClose.focus();
   }
 
