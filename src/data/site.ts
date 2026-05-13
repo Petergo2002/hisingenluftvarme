@@ -20,7 +20,7 @@ export const SITE = {
 
 export const SERVICE_IMAGES = {
   hero: "/images/hero.png",
-  installation: "/images/service-installation.png",
+  installation: "/images/service-installation.jpg",
   service: "/images/service-maintenance.png",
   troubleshooting: "/images/service-troubleshooting.png",
 };
@@ -31,7 +31,16 @@ export const AREA_LINKS = [
   { name: "Lilla Edet", link: "/luftvarmepump-lilla-edet" },
 ];
 
-export const PRODUCTS = [
+export interface Product {
+  name: string;
+  specs: string[];
+  price: string;
+  image?: string;
+  imageAlt?: string;
+  productSheet?: string;
+}
+
+export const PRODUCTS: Product[] = [
   {
     name: "Panasonic HZ25ZKE",
     specs: [
@@ -44,6 +53,7 @@ export const PRODUCTS = [
       "5 års garanti",
     ],
     price: "24 550 kr",
+    productSheet: "https://www.aircon.panasonic.eu/SE_sv/model/cs-hz25zke-h-cu-hz25zke/",
   },
   {
     name: "Panasonic NZ25YKE",
@@ -57,6 +67,7 @@ export const PRODUCTS = [
       "5 års garanti",
     ],
     price: "19 875 kr",
+    productSheet: "https://www.aircon.panasonic.eu/SE_sv/model/cs-nz25yke-cu-nz25yke/",
   },
   {
     name: "Fujitsu Nordic Master 09",
@@ -70,6 +81,7 @@ export const PRODUCTS = [
       "5 års garanti",
     ],
     price: "23 550 kr",
+    productSheet: "https://www.klima-therm.com/se/files/page_files/840/kt-fujitsu-nordic-master-pb-2510-dig.pdf",
   },
   {
     name: "Panasonic CZ25ZKE",
@@ -83,6 +95,7 @@ export const PRODUCTS = [
       "5 års garanti",
     ],
     price: "18 875 kr",
+    productSheet: "https://www.aircon.panasonic.eu/SE_sv/model/cs-cz25zke-cu-cz25zke/",
   },
   {
     name: "Altech FXLVP12",
@@ -96,6 +109,7 @@ export const PRODUCTS = [
       "5 års garanti",
     ],
     price: "19 950 kr",
+    productSheet: "https://www.dahl.se/produkt/luft-luftvarmepump-fxlvp12-altech-6252029",
   },
   {
     name: "Fujitsu Slim Excellence 09",
@@ -109,6 +123,7 @@ export const PRODUCTS = [
       "5 års garanti",
     ],
     price: "19 950 kr",
+    productSheet: "https://www.klima-therm.com/se/produkter/fujitsu/single-split-vaermepumpar/vaeggmonterade-aggregat/slim-excellence-3254kw%2C718%2Cse",
   },
   {
     name: "Kaisai Pro Heat+ 09",
@@ -122,6 +137,7 @@ export const PRODUCTS = [
       "5 års garanti",
     ],
     price: "13 650 kr",
+    productSheet: "https://kaisai.com/files/page_files/533/kaisai-product-guide-2025-en.pdf",
   },
   {
     name: "Kaisai Pro Heat+ 12",
@@ -135,6 +151,7 @@ export const PRODUCTS = [
       "5 års garanti",
     ],
     price: "14 350 kr",
+    productSheet: "https://kaisai.com/files/page_files/533/kaisai-product-guide-2025-en.pdf",
   },
 ];
 

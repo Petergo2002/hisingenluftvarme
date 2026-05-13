@@ -2,11 +2,12 @@
 import Container from './Container.astro';
 import { AREA_LINKS, SITE } from '../data/site';
 
-const footerLogos = [
-  {
-    src: "https://impro.usercontent.one/appid/oneComWsb/domain/hisingenluftvarme.se/media/hisingenluftvarme.se/onewebmedia/logga%20nordic%20cup%20(1).jpg?etag=W%2F%221a7c5-19b6ac57888%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=127%2B105&quality=85",
-    alt: "Nordic Cup",
-  },
+const sponsorLogo = {
+  src: "https://impro.usercontent.one/appid/oneComWsb/domain/hisingenluftvarme.se/media/hisingenluftvarme.se/onewebmedia/logga%20nordic%20cup%20(1).jpg?etag=W%2F%221a7c5-19b6ac57888%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=127%2B105&quality=85",
+  alt: "Nordic Cup",
+};
+
+const partnerLogos = [
   {
     src: "https://impro.usercontent.one/appid/oneComWsb/domain/hisingenluftvarme.se/media/hisingenluftvarme.se/onewebmedia/mitsubishi-electric-vector-logo.png?etag=W%2F%2216ab-19be509b3e8%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=182%2B182",
     alt: "Mitsubishi Electric",
@@ -60,17 +61,27 @@ const footerLogos = [
         </div>
       </div>
     </div>
-    <div class="sponsor-strip">
-      <div class="sponsor-copy">
-        <p>Stolt sponsor av</p>
-        <span>2–6 januari 2026</span>
+    <div class="partners-strip">
+      <div class="strip-copy">
+        <p>Partners</p>
       </div>
-      <div class="sponsor-logos" aria-label="Sponsorer och varumärken">
-        {footerLogos.map((logo) => (
-          <div class="sponsor-logo">
+      <div class="logo-grid" aria-label="Partners">
+        {partnerLogos.map((logo) => (
+          <div class="logo-tile">
             <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" />
           </div>
         ))}
+      </div>
+    </div>
+    <div class="sponsor-strip">
+      <div class="strip-copy">
+        <p>Stolt sponsor av</p>
+        <span>Nordic Cup · 2–6 januari 2026</span>
+      </div>
+      <div class="logo-grid sponsor-logo-grid" aria-label="Sponsor">
+        <div class="logo-tile">
+          <img src={sponsorLogo.src} alt={sponsorLogo.alt} loading="lazy" decoding="async" />
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
@@ -137,6 +148,7 @@ const footerLogos = [
   ul li a:hover {
     color: var(--secondary);
   }
+  .partners-strip,
   .sponsor-strip {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -144,12 +156,14 @@ const footerLogos = [
     gap: 2.5rem;
     padding: 1.5rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .sponsor-strip {
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
-  .sponsor-copy {
+  .strip-copy {
     min-width: 10rem;
   }
-  .sponsor-copy p {
+  .strip-copy p {
     margin-bottom: 0.35rem;
     color: var(--white);
     font-size: 0.85rem;
@@ -157,18 +171,22 @@ const footerLogos = [
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
-  .sponsor-copy span {
+  .strip-copy span {
     color: rgba(255, 255, 255, 0.58);
     font-size: 0.85rem;
   }
-  .sponsor-logos {
+  .logo-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(112px, 1fr));
+    grid-template-columns: repeat(3, minmax(112px, 1fr));
     align-items: stretch;
     justify-content: flex-end;
     gap: 1rem;
   }
-  .sponsor-logo {
+  .sponsor-logo-grid {
+    grid-template-columns: minmax(112px, 180px);
+    justify-content: end;
+  }
+  .logo-tile {
     min-width: 0;
     height: 74px;
     padding: 0.6rem;
@@ -179,7 +197,7 @@ const footerLogos = [
     border: 1px solid rgba(247, 146, 46, 0.22);
     border-radius: 8px;
   }
-  .sponsor-logo img {
+  .logo-tile img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
@@ -203,22 +221,30 @@ const footerLogos = [
     .footer-nav {
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
+    .partners-strip,
     .sponsor-strip {
       align-items: flex-start;
       grid-template-columns: 1fr;
       gap: 1.25rem;
     }
-    .sponsor-logos {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+    .logo-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       width: 100%;
+    }
+    .sponsor-logo-grid {
+      grid-template-columns: minmax(0, 180px);
+      justify-content: start;
     }
   }
 
   @media (max-width: 640px) {
-    .sponsor-logos {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .logo-grid {
+      grid-template-columns: 1fr;
     }
-    .sponsor-logo {
+    .sponsor-logo-grid {
+      grid-template-columns: 1fr;
+    }
+    .logo-tile {
       height: 68px;
     }
     .footer-bottom {

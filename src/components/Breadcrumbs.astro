@@ -41,8 +41,8 @@ const breadcrumbSchema = {
           return (
           <li>
             <span class="separator">/</span>
-            {crumb.link && !isCurrent ? (
-              <a href={crumb.link}>{crumb.text}</a>
+            {crumb.link ? (
+              <a href={crumb.link} aria-current={isCurrent ? "page" : undefined}>{crumb.text}</a>
             ) : isCurrent ? (
               <span aria-current="page">{crumb.text}</span>
             ) : (

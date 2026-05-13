@@ -27,7 +27,7 @@ const otherServices = [
     title: "Installation av luftvärmepump",
     description: "Standardinstallationen täcker de flesta installationer, men extra rör, kabel eller tillägg kan behövas.",
     link: "/installation-luftvarmepump",
-    image: "/images/service-installation.png",
+    image: "/images/service-installation.jpg",
     imageAlt: "Installation av luftvärmepump i villa"
   }
 ];
@@ -55,7 +55,7 @@ const serviceSchema = {
 ---
 
 <BaseLayout title={title} description={description} image="/images/service-maintenance.png" structuredData={serviceSchema}>
-  <Breadcrumbs crumbs={[{ text: "Tjänster" }, { text: serviceName }]} />
+  <Breadcrumbs crumbs={[{ text: "Tjänster", link: "/#tjanster" }, { text: serviceName, link: "/service-luftvarmepump" }]} />
 
   <HeroSection 
     title={serviceName}

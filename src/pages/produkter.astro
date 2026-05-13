@@ -37,7 +37,7 @@ const productListSchema = {
 };
 ---
 
-<BaseLayout title={title} description={description} image="/images/service-installation.png" structuredData={productListSchema}>
+<BaseLayout title={title} description={description} image="/images/service-installation.jpg" structuredData={productListSchema}>
   <Breadcrumbs crumbs={[{ text: title }]} />
 
   <section class="section-padding bg-light">
@@ -51,6 +51,15 @@ const productListSchema = {
       <div class="products-grid">
         {PRODUCTS.map((product) => (
           <article class="surface product-card">
+            {product.image && (
+              <img
+                src={product.image}
+                alt={product.imageAlt ?? product.name}
+                class="product-image"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
             <div>
               <h2>{product.name}</h2>
               <p class="price">{product.price}</p>
@@ -59,6 +68,11 @@ const productListSchema = {
             <ul>
               {product.specs.map((spec) => <li>{spec}</li>)}
             </ul>
+            {product.productSheet && (
+              <a href={product.productSheet} class="product-sheet" target="_blank" rel="noopener noreferrer">
+                Produktblad
+              </a>
+            )}
           </article>
         ))}
       </div>
@@ -97,11 +111,26 @@ const productListSchema = {
     align-items: stretch;
   }
   .product-card {
-    padding: 2rem;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     min-width: 0;
+  }
+  .product-card > div,
+  .product-card > ul,
+  .product-sheet {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .product-card > div:first-child {
+    margin-top: 2rem;
+  }
+  .product-image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    background: var(--bg-subtle);
   }
   .product-card h2 {
     font-size: 1.35rem;
@@ -127,6 +156,20 @@ const productListSchema = {
     margin-bottom: 0.6rem;
     line-height: 1.5;
   }
+  .product-sheet {
+    margin-top: auto;
+    margin-bottom: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--secondary-hover);
+    font-size: 0.875rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .product-sheet:hover {
+    color: var(--secondary);
+  }
 
   @media (max-width: 640px) {
     .section-header {
@@ -143,8 +186,16 @@ const productListSchema = {
     }
 
     .product-card {
-      padding: 1.5rem;
       gap: 1.25rem;
+    }
+    .product-card > div,
+    .product-card > ul,
+    .product-sheet {
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+    }
+    .product-card > div:first-child {
+      margin-top: 1.5rem;
     }
 
     .product-card h2 {
@@ -154,6 +205,9 @@ const productListSchema = {
 
     .price {
       font-size: 1.45rem;
+    }
+    .product-sheet {
+      margin-bottom: 1.5rem;
     }
   }
 </style>

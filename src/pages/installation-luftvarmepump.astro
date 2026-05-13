@@ -54,14 +54,14 @@ const serviceSchema = {
 };
 ---
 
-<BaseLayout title={title} description={description} image="/images/service-installation.png" structuredData={serviceSchema}>
-  <Breadcrumbs crumbs={[{ text: "Tjänster" }, { text: serviceName }]} />
+<BaseLayout title={title} description={description} image="/images/service-installation.jpg" structuredData={serviceSchema}>
+  <Breadcrumbs crumbs={[{ text: "Tjänster", link: "/#tjanster" }, { text: serviceName, link: "/installation-luftvarmepump" }]} />
 
   <HeroSection 
     title={serviceName}
     description="Vår standardinstallation är utformad för att täcka de flesta installationer. Extra rör, kabel eller tillägg kan behövas beroende på förutsättningarna."
     primaryCTA={{ text: "Begär offert", link: "/offert" }}
-    image="/images/service-installation.png"
+    image="/images/service-installation.jpg"
     imageAlt="Installation av luftvärmepump utomhus"
   />
 
@@ -94,7 +94,7 @@ const serviceSchema = {
     </Container>
   </section>
 
-  <section class="section-padding">
+  <section id="rot-avdrag" class="section-padding">
     <Container>
       <h2>ROT-villkor</h2>
       <div class="content-grid">

@@ -28,7 +28,7 @@ const services = [
     title: "Installation av luftvärmepump",
     description: "Vår standardinstallation är utformad för att täcka de flesta installationer. Extra rör, kabel eller tillägg kan behövas beroende på förutsättningarna.",
     link: "/installation-luftvarmepump",
-    image: "/images/service-installation.png",
+    image: "/images/service-installation.jpg",
     imageAlt: "Installation av luftvärmepump i villa"
   },
   {
@@ -49,10 +49,10 @@ const clockIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24
 const activityIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`;
 
 const trustBenefits = [
-  { title: "Kostnadsfritt hembesök", description: "Vi kommer ut i Göteborg, Stenungsund och Lilla Edet och ser över vilken lösning som passar huset.", icon: userIcon },
-  { title: "Trygg installation", description: "Standardinstallationen täcker de flesta installationer och tydliggör eventuella tillägg i förväg.", icon: shieldIcon },
-  { title: "ROT-avdrag på fakturan", description: "Vi gör ROT-avdraget direkt på fakturan och ansöker om ersättning från Skatteverket.", icon: fileIcon },
-  { title: "Lokal kontakt", description: "Du når oss på telefon eller e-post och vi hör oftast av oss inom 24 timmar.", icon: checkIcon }
+  { title: "Kostnadsfritt hembesök", description: "Vi kommer ut i Göteborg, Stenungsund och Lilla Edet och ser över vilken lösning som bäst passar huset.", icon: userIcon, link: "/offert" },
+  { title: "Installation", description: "Standardinstallationen täcker de flesta installationer och tydliggör eventuella tillägg i förväg.", icon: shieldIcon, link: "/installation-luftvarmepump" },
+  { title: "Service", description: "Service med rätt intervall hjälper pumpen att behålla god effekt över tid.", icon: checkIcon, link: "/service-luftvarmepump" },
+  { title: "ROT-avdrag", description: "Vi gör ROT-avdraget direkt på fakturan och ansöker om ersättning från Skatteverket.", icon: fileIcon, link: "/installation-luftvarmepump#rot-avdrag" }
 ];
 
 const qualityBenefits = [
@@ -105,7 +105,7 @@ const faqs = [
 
 <BaseLayout title={title} description={description} image="/images/hero.png" structuredData={serviceListSchema}>
   <HeroSection 
-    eyebrow="Din lokala hjälp i Göteborg, Stenungsund och Lilla Edet"
+    eyebrow="Din lokala kyltekniker i Göteborg, Stenungsund och Lilla Edet"
     title="Hisingen Luftvärme"
     description={SITE.mainMessage}
     primaryCTA={{ text: "Begär kostnadsfri offert", link: "/offert" }}
