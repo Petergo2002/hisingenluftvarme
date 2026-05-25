@@ -1,7 +1,7 @@
 import { SITE } from "../data/site";
 
 export function GET() {
-  const sitemapUrl = new URL("/sitemap-index.xml", SITE.url).toString();
+  const sitemapUrl = new URL("/sitemap.xml", SITE.url).toString();
   const body = [
     "User-agent: *",
     "Allow: /",
