@@ -53,7 +53,9 @@ export const PRODUCTS: Product[] = [
       "5 års garanti",
     ],
     price: "24 550 kr",
-    productSheet: "https://www.aircon.panasonic.eu/SE_sv/model/cs-hz25zke-h-cu-hz25zke/",
+    image: "/images/products/panasonic-hz25zke.png",
+    imageAlt: "Panasonic HZ25ZKE luftvärmepump med innedel och utedel",
+    productSheet: "/productblad/Produktblad%20Panasonic%20HZ25ZKE.pdf",
   },
   {
     name: "Panasonic NZ25YKE",
@@ -67,7 +69,9 @@ export const PRODUCTS: Product[] = [
       "5 års garanti",
     ],
     price: "19 875 kr",
-    productSheet: "https://www.aircon.panasonic.eu/SE_sv/model/cs-nz25yke-cu-nz25yke/",
+    image: "/images/products/panasonic-nz25yke.png",
+    imageAlt: "Panasonic NZ25YKE luftvärmepump med innedel och utedel",
+    productSheet: "/productblad/Produktblad%20Panasonic%20NZ25YKE.pdf",
   },
   {
     name: "Fujitsu Nordic Master 09",
@@ -81,7 +85,9 @@ export const PRODUCTS: Product[] = [
       "5 års garanti",
     ],
     price: "23 550 kr",
-    productSheet: "https://www.klima-therm.com/se/files/page_files/840/kt-fujitsu-nordic-master-pb-2510-dig.pdf",
+    image: "/images/products/fujitsu-nordic-master-09.png",
+    imageAlt: "Fujitsu Nordic Master 09 luftvärmepump med innedel och utedel",
+    productSheet: "/productblad/Produktblad%20Fujitsu%20Nordic%20Master.pdf",
   },
   {
     name: "Panasonic CZ25ZKE",
@@ -95,7 +101,9 @@ export const PRODUCTS: Product[] = [
       "5 års garanti",
     ],
     price: "18 875 kr",
-    productSheet: "https://www.aircon.panasonic.eu/SE_sv/model/cs-cz25zke-cu-cz25zke/",
+    image: "/images/products/panasonic-cz25zke.png",
+    imageAlt: "Panasonic CZ25ZKE luftvärmepump med innedel och utedel",
+    productSheet: "/productblad/Produktblad%20Panasonic%20CZ25ZKE.pdf",
   },
   {
     name: "Altech FXLVP12",
@@ -109,7 +117,9 @@ export const PRODUCTS: Product[] = [
       "5 års garanti",
     ],
     price: "19 950 kr",
-    productSheet: "https://www.dahl.se/produkt/luft-luftvarmepump-fxlvp12-altech-6252029",
+    image: "/images/products/altech-fxlvp-9.png",
+    imageAlt: "Altech FXLVP 9 luftvärmepump med innedel och utedel",
+    productSheet: "/productblad/Produktblad%20Altech%20FXLVP%2009.pdf",
   },
   {
     name: "Fujitsu Slim Excellence 09",
@@ -123,7 +133,9 @@ export const PRODUCTS: Product[] = [
       "5 års garanti",
     ],
     price: "19 950 kr",
-    productSheet: "https://www.klima-therm.com/se/produkter/fujitsu/single-split-vaermepumpar/vaeggmonterade-aggregat/slim-excellence-3254kw%2C718%2Cse",
+    image: "/images/products/fujitsu-slim-excellence-09.png",
+    imageAlt: "Fujitsu Slim Excellence 09 luftvärmepump med innedel och utedel",
+    productSheet: "/productblad/Produktblad%20Fujitsu%20Slim%20Excellence.pdf",
   },
   {
     name: "Kaisai Pro Heat+ 09",
@@ -137,7 +149,9 @@ export const PRODUCTS: Product[] = [
       "5 års garanti",
     ],
     price: "13 650 kr",
-    productSheet: "https://kaisai.com/files/page_files/533/kaisai-product-guide-2025-en.pdf",
+    image: "/images/products/kaisai-pro-heat-plus-09.png",
+    imageAlt: "Kaisai Pro Heat+ 09 luftvärmepump med innedel och utedel",
+    productSheet: "/productblad/Produktblad%20Kaisai%20Pro%20Heat%2B.pdf",
   },
   {
     name: "Kaisai Pro Heat+ 12",
@@ -151,7 +165,9 @@ export const PRODUCTS: Product[] = [
       "5 års garanti",
     ],
     price: "14 350 kr",
-    productSheet: "https://kaisai.com/files/page_files/533/kaisai-product-guide-2025-en.pdf",
+    image: "/images/products/kaisai-pro-heat-plus-12.png",
+    imageAlt: "Kaisai Pro Heat+ 12 luftvärmepump med innedel och utedel",
+    productSheet: "/productblad/Produktblad%20Kaisai%20Pro%20Heat%2B.pdf",
   },
 ];
 

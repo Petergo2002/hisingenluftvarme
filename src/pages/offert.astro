@@ -6,7 +6,6 @@ import { AREA_LINKS, SITE } from '../data/site';
 
 const title = "Kontakt & Offert";
 const description = "Kontakta Hisingen Luftvärme för kostnadsfri offert, hembesök, installation eller service av luftvärmepump i Göteborg, Stenungsund och Lilla Edet.";
-const offerMailto = `${SITE.emailHref}?subject=Offertforfragan`;
 const contactPageSchema = {
   "@type": "ContactPage",
   name: title,
@@ -45,7 +44,12 @@ const contactPageSchema = {
   <section class="section-padding">
     <Container>
       <div class="quote-layout">
-        <form class="surface quote-form" action={offerMailto} method="post" enctype="text/plain">
+        <form id="offer-form" class="surface quote-form" action="https://api.web3forms.com/submit" method="post">
+          <input type="hidden" name="access_key" value="2f254e4f-d9bb-423e-96f9-be5f3d93779a" />
+          <input type="hidden" name="subject" value="Ny offertförfrågan från Hisingen Luftvärme" />
+          <input type="hidden" name="from_name" value="Hisingen Luftvärme" />
+          <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off" />
+
           <div class="form-grid">
             <label>
               <span>Namn</span>
@@ -82,7 +86,10 @@ const contactPageSchema = {
             </label>
           </div>
 
-          <button type="submit" class="btn btn-primary">Skapa offertförfrågan</button>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Skapa offertförfrågan</button>
+            <p id="form-message" class="form-message" aria-live="polite"></p>
+          </div>
         </form>
 
         <aside class="quote-sidebar">
@@ -105,6 +112,54 @@ const contactPageSchema = {
     </Container>
   </section>
 </BaseLayout>
+
+<script>
+  const form = document.getElementById("offer-form");
+  const submitBtn = form?.querySelector('button[type="submit"]');
+  const formMessage = document.getElementById("form-message");
+
+  const setFormMessage = (message, type = "") => {
+    if (!formMessage) return;
+    formMessage.textContent = message;
+    formMessage.dataset.type = type;
+  };
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!(form instanceof HTMLFormElement) || !(submitBtn instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    const formData = new FormData(form);
+    const originalText = submitBtn.textContent ?? "Skapa offertförfrågan";
+
+    submitBtn.textContent = "Skickar...";
+    submitBtn.disabled = true;
+    setFormMessage("Skickar din förfrågan...", "loading");
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setFormMessage("Tack! Din förfrågan har skickats. Vi återkommer så snart vi kan.", "success");
+        form.reset();
+      } else {
+        setFormMessage(data.message ? `Fel: ${data.message}` : "Något gick fel. Kontrollera uppgifterna och försök igen.", "error");
+      }
+    } catch {
+      setFormMessage("Något gick fel. Försök igen eller kontakta oss direkt via telefon eller e-post.", "error");
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  });
+</script>
 
 <style>
   .page-intro,
@@ -151,6 +206,13 @@ const contactPageSchema = {
     gap: 1.5rem;
   }
 
+  .botcheck {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .quote-form label {
     display: flex;
     flex-direction: column;
@@ -162,6 +224,36 @@ const contactPageSchema = {
   .quote-sidebar {
     display: grid;
     gap: 1rem;
+  }
+
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .form-actions .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  .form-message {
+    margin: 0;
+    min-height: 1.4em;
+    flex: 1 1 16rem;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .form-message[data-type="success"] {
+    color: #187044;
+  }
+
+  .form-message[data-type="error"] {
+    color: #a22b2b;
   }
 
   .contact-link {
