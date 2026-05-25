@@ -44,6 +44,7 @@ const schemaGraph = {
       "@id": `${SITE.url}/#business`,
       name: SITE.name,
       url: SITE.url,
+      description: SITE.defaultDescription,
       logo: {
         "@type": "ImageObject",
         url: absoluteUrl(SITE.logo),
@@ -115,7 +116,7 @@ const schemaGraph = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
