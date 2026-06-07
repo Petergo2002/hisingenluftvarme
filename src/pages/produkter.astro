@@ -3,10 +3,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/Container.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CTASection from '../components/CTASection.astro';
-import { PRODUCTS, SITE } from '../data/site';
+import FAQSection from '../components/FAQSection.astro';
+import { AREA_LINKS, PRODUCTS, SERVICE_AREA_SCHEMA, SITE } from '../data/site';
 
-const title = "Luftvärmepumpar med installation | Hisingen Luftvärme";
-const description = "Jämför luftvärmepumpar med pris efter ROT-avdrag och standardinstallation i Göteborg, Stenungsund och Lilla Edet.";
+const title = "Luftvärmepumpar med installation | Priser efter ROT";
+const description = "Jämför luftvärmepumpar med pris efter ROT-avdrag och standardinstallation i Göteborg, Stenungsund och Lilla Edet. Få hjälp att välja rätt modell.";
+const choiceGuides = [
+  {
+    title: "Boyta och planlösning",
+    text: "Vi tittar på hur stor yta som ska värmas, hur öppen planlösningen är och var luften behöver spridas för att pumpen ska göra verklig nytta.",
+  },
+  {
+    title: "Ljud, placering och utedel",
+    text: "Rätt placering påverkar både komfort, ljudnivå, kondensvatten, serviceåtkomst och hur prydlig installationen blir på fasaden.",
+  },
+  {
+    title: "Pris efter ROT-avdrag",
+    text: "Produktpriserna visas efter ROT-avdrag och inklusive standardinstallation. Vid hembesök går vi igenom om tillägg behövs.",
+  },
+];
+const productFaqs = [
+  {
+    question: "Ingår installation i produktpriserna?",
+    answer: "Ja, priserna på produktsidan visas efter ROT-avdrag och inklusive standardinstallation. Eventuella tillägg beror på installationsförutsättningarna.",
+  },
+  {
+    question: "Vilken luftvärmepump passar mitt hus?",
+    answer: "Det beror på boyta, planlösning, isolering, placering, ljudkrav och hur pumpen ska användas. Vi hjälper dig jämföra modeller vid hembesök eller offertförfrågan.",
+  },
+  {
+    question: "Kan jag få hjälp i Göteborg, Stenungsund eller Lilla Edet?",
+    answer: "Ja, Hisingen Luftvärme prioriterar Göteborg, Stenungsund och Lilla Edet för rådgivning, installation, service och felsökning.",
+  },
+];
 const productListSchema = {
   "@type": "ItemList",
   name: "Luftvärmepumpar med installation",
@@ -15,6 +44,7 @@ const productListSchema = {
     position: index + 1,
     item: {
       "@type": "Product",
+      "@id": `${new URL("/produkter", SITE.url).toString()}#${product.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
       name: product.name,
       description: product.specs.join(", "),
       category: "Luftvärmepump",
@@ -29,6 +59,7 @@ const productListSchema = {
         priceCurrency: "SEK",
         availability: "https://schema.org/InStock",
         url: new URL("/produkter", SITE.url).toString(),
+        areaServed: SERVICE_AREA_SCHEMA,
         seller: {
           "@id": `${SITE.url}/#business`,
         },
@@ -46,7 +77,7 @@ const productListSchema = {
       <div class="section-header text-center">
         <span class="eyebrow">Produkter</span>
         <h1>Luftvärmepumpar med installation</h1>
-        <p class="text-muted">Alla priser visas efter ROT-avdrag och inklusive standardinstallation.</p>
+        <p class="text-muted">Alla priser visas efter ROT-avdrag och inklusive standardinstallation i Göteborg, Stenungsund och Lilla Edet.</p>
       </div>
 
       <div class="products-grid">
@@ -80,6 +111,31 @@ const productListSchema = {
     </Container>
   </section>
 
+  <section class="section-padding">
+    <Container>
+      <div class="section-header narrow">
+        <span class="eyebrow">Modellval</span>
+        <h2>Välj pump efter huset, inte bara priset</h2>
+        <p class="text-muted">En luftvärmepump ska passa bostaden, placeringen och hur du använder värme och kyla i vardagen.</p>
+      </div>
+      <div class="guide-grid">
+        {choiceGuides.map((guide) => (
+          <article class="guide-card">
+            <h3>{guide.title}</h3>
+            <p>{guide.text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="link-strip" aria-label="Fortsätt läsa">
+        <a href="/luftvarmepump-pris">Se prisguide och ROT</a>
+        <a href="/installation-luftvarmepump">Läs om installation</a>
+        {AREA_LINKS.map((area) => <a href={area.link}>Luftvärmepump i {area.name}</a>)}
+      </div>
+    </Container>
+  </section>
+
+  <FAQSection faqs={productFaqs} />
+
   <CTASection
     title="Osäker på vilken modell som passar?"
     description="Vi gör kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet och hjälper dig att hitta den bästa lösningen för ditt hus."
@@ -95,14 +151,25 @@ const productListSchema = {
   .section-header {
     margin-bottom: 4rem;
   }
+  .section-header.narrow {
+    max-width: 760px;
+    margin-bottom: 2rem;
+  }
   .text-center {
     text-align: center;
   }
   .section-header h1,
-  .section-header p,
   .product-card h2,
   .product-card li,
   .price-note {
+    overflow-wrap: anywhere;
+  }
+  .section-header h1 {
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: auto;
+  }
+  .section-header p {
     overflow-wrap: anywhere;
   }
   .products-grid {
@@ -172,6 +239,45 @@ const productListSchema = {
   .product-sheet:hover {
     color: var(--secondary);
   }
+  .guide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .guide-card {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    background: var(--white);
+  }
+  .guide-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.8rem;
+  }
+  .guide-card p {
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .link-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .link-strip a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid var(--border-warm);
+    border-radius: 999px;
+    color: var(--secondary);
+    background: var(--secondary-soft);
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+  .link-strip a:hover {
+    color: var(--secondary-hover);
+  }
 
   @media (max-width: 640px) {
     .section-header {
@@ -179,7 +285,8 @@ const productListSchema = {
     }
 
     .section-header h1 {
-      font-size: clamp(2rem, 10vw, 2.75rem);
+      font-size: clamp(1.75rem, 8vw, 2.25rem);
+      line-height: 1.15;
     }
 
     .products-grid {
@@ -210,6 +317,12 @@ const productListSchema = {
     }
     .product-sheet {
       margin-bottom: 1.5rem;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .guide-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

@@ -7,11 +7,11 @@ import AreaCard from '../components/AreaCard.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import FAQSection from '../components/FAQSection.astro';
 import CTASection from '../components/CTASection.astro';
-import { AREA_LINKS, INSTALLATION_ADDONS, INSTALLATION_INCLUDED, ROT_TERMS, SITE } from '../data/site';
+import { AREA_LINKS, INSTALLATION_ADDONS, INSTALLATION_INCLUDED, ROT_TERMS, SERVICE_AREA_SCHEMA, SITE } from '../data/site';
 
 const serviceName = "Installation av luftvärmepump";
-const title = "Installation av luftvärmepump | Hisingen Luftvärme";
-const description = "Installation av luftvärmepump i Göteborg, Stenungsund och Lilla Edet. Standardinstallation, rådgivning och ROT-avdrag för privatkunder.";
+const title = "Installation av luftvärmepump Göteborg | Hisingen Luftvärme";
+const description = "Installation av luftvärmepump i Göteborg, Stenungsund och Lilla Edet. Kostnadsfritt hembesök, tydlig standardinstallation, ROT-avdrag och rådgivning.";
 
 const areas = AREA_LINKS;
 
@@ -29,27 +29,53 @@ const otherServices = [
     link: "/service-luftvarmepump",
     image: "/images/service-maintenance.png",
     imageAlt: "Professionell service av luftvärmepump"
+  },
+  {
+    title: "Felsökning av luftvärmepump",
+    description: "Vi hjälper vid felkod, missljud, sämre värme eller andra problem med befintlig pump.",
+    link: "/felsokning-luftvarmepump",
+    image: "/images/service-troubleshooting.png",
+    imageAlt: "Felsökning av luftvärmepump"
   }
+];
+
+const installationSteps = [
+  {
+    title: "1. Hembesök och behovsbild",
+    text: "Vi går igenom boyta, planlösning, isolering, befintlig uppvärmning och var värmen behöver spridas i vardagen.",
+  },
+  {
+    title: "2. Placering och modellval",
+    text: "Vi föreslår placering av inne- och utedel, tar hänsyn till ljud, väggmaterial, kondensvatten och serviceåtkomst och matchar huset med rätt modell.",
+  },
+  {
+    title: "3. Offert med ROT och tillägg",
+    text: "Du får en tydlig prisbild där standardinstallation, ROT-avdrag och eventuella tillägg förklaras innan arbetet bokas.",
+  },
+  {
+    title: "4. Installation och genomgång",
+    text: "Efter montering, vakuumsugning och driftsättning provkörs pumpen och du får en genomgång av fjärrkontroll och grundinställningar.",
+  },
 ];
 
 const faqs = [
   { question: "Vad ingår i en standardinstallation?", answer: "Standardinstallationen innehåller bland annat framkörning, väggkonsol, vibrationsdämpare, upp till 5 meter isolerade kopparrör, kabeldragning, plastkanal, håltagning, vakuumsugning, driftsättning och genomgång av fjärrkontrollen." },
   { question: "Kan tillägg behövas?", answer: "Ja, extra rör, kabel eller andra tillägg kan behövas beroende på förutsättningarna. Exempel är markstativ, skyddstak, betonghåltagning eller arbete på höjd." },
-  { question: "Hur fungerar ROT-avdraget?", answer: "Hisingen Luftvärme gör avdraget direkt på fakturan och ansöker om ersättning från Skatteverket. Kunden ansvarar för att villkoren för ROT-avdrag är uppfyllda." }
+  { question: "Hur fungerar ROT-avdraget?", answer: "Hisingen Luftvärme gör avdraget direkt på fakturan och ansöker om ersättning från Skatteverket. Kunden ansvarar för att villkoren för ROT-avdrag är uppfyllda." },
+  { question: "Gör ni hembesök innan installation?", answer: "Ja, vi gör kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet när vi behöver se huset, planlösningen och installationsförutsättningarna på plats." },
+  { question: "Kan ni byta ut en äldre luftvärmepump?", answer: "Ja, vi kan hjälpa till när en äldre pump ska ersättas. Vi kontrollerar placering, rördragning och om den nya modellen bör sitta på samma plats eller flyttas." }
 ];
 
 const serviceSchema = {
   "@type": "Service",
+  "@id": `${new URL("/installation-luftvarmepump", SITE.url).toString()}#service`,
   name: serviceName,
   serviceType: "Installation av luftvärmepump",
   description,
   provider: {
     "@id": `${SITE.url}/#business`,
   },
-  areaServed: AREA_LINKS.map((area) => ({
-    "@type": "City",
-    name: area.name,
-  })),
+  areaServed: SERVICE_AREA_SCHEMA,
   url: new URL("/installation-luftvarmepump", SITE.url).toString(),
 };
 ---
@@ -59,7 +85,7 @@ const serviceSchema = {
 
   <HeroSection 
     title={serviceName}
-    description="Vår standardinstallation är utformad för att täcka de flesta installationer. Extra rör, kabel eller tillägg kan behövas beroende på förutsättningarna."
+    description="Fackmässig installation av luftvärmepump i Göteborg, Stenungsund och Lilla Edet med hembesök, tydlig offert, ROT-avdrag och genomgång när pumpen är driftsatt."
     primaryCTA={{ text: "Begär offert", link: "/offert" }}
     image="/images/service-installation.jpg"
     imageAlt="Installation av luftvärmepump utomhus"
@@ -70,7 +96,8 @@ const serviceSchema = {
       <div class="content-grid">
         <div class="main-content">
           <h2>Professionell hjälp från start till mål</h2>
-          <p>{SITE.mainMessage} Vi hjälper dig i Göteborg, Stenungsund och Lilla Edet och gör kostnadsfria hembesök för att hitta den bästa lösningen för ditt hus.</p>
+          <p>{SITE.mainMessage} Vi hjälper dig i Göteborg, Stenungsund och Lilla Edet och gör kostnadsfria hembesök för att hitta rätt luft-luftvärmepump, rätt placering och en installation som fungerar över tid.</p>
+          <p>En bra installation handlar inte bara om att få upp en maskin på väggen. Vi går igenom luftflöde, ljudnivå, väggmaterial, placering av utedel, kondensvatten och framtida service så att pumpen kan ge bra effekt i vardagen.</p>
           
           <h3>Vad ingår i vår installation?</h3>
           <ul>
@@ -82,6 +109,20 @@ const serviceSchema = {
   </section>
 
   <section class="section-padding bg-light">
+    <Container>
+      <h2>Så går en installation till</h2>
+      <div class="steps-grid">
+        {installationSteps.map((step) => (
+          <article class="step-item">
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding">
     <Container>
       <h2>Möjliga installationstillägg</h2>
       <div class="needs-grid">
@@ -110,6 +151,7 @@ const serviceSchema = {
   <section class="section-padding bg-light">
     <Container>
       <h2>Vi installerar i våra tre områden</h2>
+      <p class="section-copy">Välj område om du vill läsa mer om lokala förutsättningar, vanliga hustyper och hur vi tänker kring placering i just Göteborg, Stenungsund eller Lilla Edet.</p>
       <div class="areas-grid">
         {areas.map(area => (
           <AreaCard {...area} />
@@ -158,9 +200,33 @@ const serviceSchema = {
     padding: 2.5rem;
     border: 1px solid var(--border);
   }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .step-item {
+    background: var(--white);
+    padding: 2rem;
+    border: 1px solid var(--border);
+  }
   .need-item h3 {
     margin-bottom: 1rem;
     font-size: 1.25rem;
+  }
+  .step-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+  .step-item p,
+  .section-copy {
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .section-copy {
+    max-width: 760px;
+    margin-top: 1rem;
   }
   .main-content h2, .main-content h3 {
     text-transform: none;

@@ -1,6 +1,15 @@
 ---
 import Container from './Container.astro';
 import { SITE } from '../data/site';
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const serviceLinks = [
+  { href: '/installation-luftvarmepump', label: 'Installation' },
+  { href: '/service-luftvarmepump', label: 'Service & underhåll' },
+  { href: '/felsokning-luftvarmepump', label: 'Felsökning' },
+];
+const isCurrent = (href: string) => currentPath === href;
+const isServicePage = serviceLinks.some(({ href }) => isCurrent(href));
 ---
 
 <header class="header">
@@ -12,17 +21,40 @@ import { SITE } from '../data/site';
 
       <nav class="desktop-nav" aria-label="Huvudnavigation">
         <ul class="nav-links">
-          <li><a href="/">Start</a></li>
-          <li><a href="/produkter">Produkter</a></li>
-          <li><a href="/projekt">Projekt</a></li>
-          <li><a href="/#tjanster">Tjänster</a></li>
-          <li><a href="/offert">Kontakt</a></li>
+          <li><a href="/" aria-current={isCurrent('/') ? 'page' : undefined}>Start</a></li>
+          <li><a href="/produkter" aria-current={isCurrent('/produkter') ? 'page' : undefined}>Produkter</a></li>
+          <li class="nav-dropdown">
+            <details data-nav-dropdown>
+              <summary class:list={{ active: isServicePage }}>
+                Tjänster
+                <svg viewBox="0 0 12 8" aria-hidden="true">
+                  <path d="m1 1.5 5 5 5-5"></path>
+                </svg>
+              </summary>
+              <div class="dropdown-panel">
+                <span class="dropdown-label">Våra tjänster</span>
+                <ul>
+                  {serviceLinks.map(({ href, label }) => (
+                    <li>
+                      <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>
+                        <span>{label}</span>
+                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                          <path d="M3 8h10M9 4l4 4-4 4"></path>
+                        </svg>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li><a href="/projekt" aria-current={isCurrent('/projekt') ? 'page' : undefined}>Projekt</a></li>
         </ul>
       </nav>
 
       <div class="desktop-actions">
         <a href={SITE.phoneHref} class="nav-link-simple">{SITE.phoneDisplay}</a>
-        <a href="/offert" class="btn btn-primary">Begär offert</a>
+        <a href="/offert" class="btn btn-primary" aria-current={isCurrent('/offert') ? 'page' : undefined}>Begär offert</a>
       </div>
 
       <details class="mobile-nav">
@@ -35,11 +67,24 @@ import { SITE } from '../data/site';
           <a href={SITE.phoneHref} class="mobile-phone">{SITE.phoneDisplay}</a>
 
           <ul class="mobile-nav-links">
-            <li><a href="/">Start</a></li>
-            <li><a href="/produkter">Produkter</a></li>
-            <li><a href="/projekt">Projekt</a></li>
-            <li><a href="/#tjanster">Tjänster</a></li>
-            <li><a href="/offert">Kontakt</a></li>
+            <li><a href="/" aria-current={isCurrent('/') ? 'page' : undefined}>Start</a></li>
+            <li><a href="/produkter" aria-current={isCurrent('/produkter') ? 'page' : undefined}>Produkter</a></li>
+            <li>
+              <details class="mobile-services" open={isServicePage}>
+                <summary class:list={{ active: isServicePage }}>
+                  Tjänster
+                  <svg viewBox="0 0 12 8" aria-hidden="true">
+                    <path d="m1 1.5 5 5 5-5"></path>
+                  </svg>
+                </summary>
+                <ul>
+                  {serviceLinks.map(({ href, label }) => (
+                    <li><a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a></li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+            <li><a href="/projekt" aria-current={isCurrent('/projekt') ? 'page' : undefined}>Projekt</a></li>
           </ul>
 
           <a href="/offert" class="btn btn-primary mobile-cta">Begär offert</a>
@@ -89,11 +134,14 @@ import { SITE } from '../data/site';
 
   .nav-links {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    gap: 1.75rem;
   }
 
   .nav-links a,
-  .mobile-nav-links a {
+  .nav-dropdown summary,
+  .mobile-nav-links > li > a,
+  .mobile-services > summary {
     font-size: 0.875rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -103,8 +151,129 @@ import { SITE } from '../data/site';
   }
 
   .nav-links a:hover,
-  .mobile-nav-links a:hover {
+  .nav-dropdown summary:hover,
+  .mobile-nav-links a:hover,
+  .mobile-services > summary:hover {
     color: var(--secondary-hover);
+  }
+
+  .nav-links a[aria-current='page'],
+  .nav-dropdown summary.active,
+  .mobile-nav-links a[aria-current='page'],
+  .mobile-services > summary.active {
+    color: var(--secondary-hover);
+  }
+
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown details {
+    position: relative;
+  }
+
+  .nav-dropdown summary,
+  .mobile-services > summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .nav-dropdown summary::-webkit-details-marker,
+  .mobile-services > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-dropdown summary svg,
+  .mobile-services > summary svg {
+    width: 10px;
+    height: 7px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+    transition: transform 0.2s ease;
+  }
+
+  .nav-dropdown details[open] > summary svg,
+  .mobile-services[open] > summary svg {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-panel {
+    position: absolute;
+    top: calc(100% + 1.25rem);
+    left: 50%;
+    width: 17rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid var(--border-warm);
+    border-radius: 10px;
+    box-shadow: 0 24px 60px rgba(20, 20, 20, 0.15);
+    transform: translateX(-50%);
+  }
+
+  .dropdown-panel::before {
+    position: absolute;
+    top: -1.3rem;
+    left: 0;
+    width: 100%;
+    height: 1.3rem;
+    content: '';
+  }
+
+  .dropdown-label {
+    display: block;
+    padding: 0.35rem 0.65rem 0.6rem;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .dropdown-panel ul {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .dropdown-panel a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    padding: 0.75rem;
+    border-radius: 6px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .dropdown-panel a:hover,
+  .dropdown-panel a[aria-current='page'] {
+    background: var(--secondary-soft);
+  }
+
+  .dropdown-panel a svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .dropdown-panel a:hover svg,
+  .dropdown-panel a[aria-current='page'] svg {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .desktop-actions {
@@ -122,6 +291,16 @@ import { SITE } from '../data/site';
 
   .nav-link-simple:hover {
     color: var(--secondary-hover);
+  }
+
+  .nav-links a:focus-visible,
+  .nav-dropdown summary:focus-visible,
+  .nav-link-simple:focus-visible,
+  .menu-toggle:focus-visible,
+  .mobile-nav-links a:focus-visible,
+  .mobile-services > summary:focus-visible {
+    outline: 2px solid var(--secondary);
+    outline-offset: 4px;
   }
 
   .desktop-actions :global(.btn-primary),
@@ -200,7 +379,38 @@ import { SITE } from '../data/site';
 
   .mobile-nav-links {
     display: grid;
-    gap: 1rem;
+    gap: 0.25rem;
+  }
+
+  .mobile-nav-links > li > a,
+  .mobile-services > summary {
+    min-height: 44px;
+    padding: 0.75rem 0.25rem;
+  }
+
+  .mobile-services ul {
+    display: grid;
+    gap: 0.15rem;
+    margin: 0.1rem 0 0.65rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--border-warm);
+  }
+
+  .mobile-services li a {
+    display: flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 0.55rem 0.75rem;
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 650;
+  }
+
+  .mobile-services li a:hover,
+  .mobile-services li a[aria-current='page'] {
+    background: var(--secondary-soft);
+    color: var(--secondary);
   }
 
   .mobile-cta {
@@ -234,3 +444,26 @@ import { SITE } from '../data/site';
     }
   }
 </style>
+
+<script>
+  const navDropdowns = document.querySelectorAll<HTMLDetailsElement>('details[data-nav-dropdown]');
+
+  document.addEventListener('click', (event) => {
+    navDropdowns.forEach((dropdown) => {
+      if (dropdown.open && !dropdown.contains(event.target as Node)) {
+        dropdown.removeAttribute('open');
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+
+    navDropdowns.forEach((dropdown) => {
+      if (!dropdown.open) return;
+
+      dropdown.removeAttribute('open');
+      dropdown.querySelector('summary')?.focus();
+    });
+  });
+</script>

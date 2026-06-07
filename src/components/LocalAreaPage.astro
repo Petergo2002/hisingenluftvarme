@@ -19,6 +19,7 @@ const { area } = Astro.props;
 const nearbyAreas = getNearbyAreas(area);
 const localServiceSchema = {
   "@type": "Service",
+  "@id": `${new URL(area.url, SITE.url).toString()}#service`,
   name: `Luftvärmepump i ${area.name}`,
   serviceType: "Installation, service och felsökning av luftvärmepump",
   description: area.description,
@@ -30,6 +31,29 @@ const localServiceSchema = {
     name: area.name,
   },
   url: new URL(area.url, SITE.url).toString(),
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: `Tjänster för luftvärmepump i ${area.name}`,
+    itemListElement: [
+      "Kostnadsfritt hembesök",
+      "Installation av luftvärmepump",
+      "Service av luftvärmepump",
+      "Felsökning av luftvärmepump",
+    ].map((name) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name,
+        areaServed: {
+          "@type": "City",
+          name: area.name,
+        },
+        provider: {
+          "@id": `${SITE.url}/#business`,
+        },
+      },
+    })),
+  },
 };
 
 const services = [

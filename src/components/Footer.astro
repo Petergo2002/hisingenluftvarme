@@ -3,21 +3,21 @@ import Container from './Container.astro';
 import { AREA_LINKS, SITE } from '../data/site';
 
 const sponsorLogo = {
-  src: "https://impro.usercontent.one/appid/oneComWsb/domain/hisingenluftvarme.se/media/hisingenluftvarme.se/onewebmedia/logga%20nordic%20cup%20(1).jpg?etag=W%2F%221a7c5-19b6ac57888%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=127%2B105&quality=85",
+  src: "https://edg07-prd-se-ixn.solidtango.com/cache/media_file/resize400x400/29dfb0c1-60cc-4fc4-a9c1-4426abb12fb3.png?cb=e9f16f01c6f3165122929b82a0ee72c3",
   alt: "Nordic Cup",
 };
 
 const partnerLogos = [
   {
-    src: "https://impro.usercontent.one/appid/oneComWsb/domain/hisingenluftvarme.se/media/hisingenluftvarme.se/onewebmedia/mitsubishi-electric-vector-logo.png?etag=W%2F%2216ab-19be509b3e8%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=182%2B182",
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Mitsubishi_Electric_logo.svg/1280px-Mitsubishi_Electric_logo.svg.png",
     alt: "Mitsubishi Electric",
   },
   {
-    src: "https://impro.usercontent.one/appid/oneComWsb/domain/hisingenluftvarme.se/media/hisingenluftvarme.se/onewebmedia/Panasonic%20Logga.png?etag=W%2F%22119d9-19bdfe8ab30%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=205%2B65",
+    src: "https://www.allvarmeteknik.se/wp-content/uploads/2015/09/panasonic.jpg",
     alt: "Panasonic",
   },
   {
-    src: "https://impro.usercontent.one/appid/oneComWsb/domain/hisingenluftvarme.se/media/hisingenluftvarme.se/onewebmedia/FUJITSU_logo_red.png?etag=W%2F%2274d5-19be5032c08%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=150%2B74",
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Fujitsu-Logo.svg/1280px-Fujitsu-Logo.svg.png",
     alt: "Fujitsu",
   },
 ];
@@ -39,10 +39,12 @@ const partnerLogos = [
           <h4>Tjänster</h4>
           <ul>
             <li><a href="/produkter">Produkter</a></li>
+            <li><a href="/luftvarmepump-pris">Priser & ROT</a></li>
             <li><a href="/projekt">Projekt</a></li>
             <li><a href="/#tjanster">Hembesök</a></li>
             <li><a href="/installation-luftvarmepump">Installation</a></li>
             <li><a href="/service-luftvarmepump">Service</a></li>
+            <li><a href="/felsokning-luftvarmepump">Felsökning</a></li>
             <li><a href="/offert">Begär offert</a></li>
           </ul>
         </div>
@@ -183,7 +185,7 @@ const partnerLogos = [
     gap: 1rem;
   }
   .sponsor-logo-grid {
-    grid-template-columns: minmax(112px, 180px);
+    grid-template-columns: minmax(140px, 220px);
     justify-content: end;
   }
   .logo-tile {
@@ -204,7 +206,8 @@ const partnerLogos = [
     object-fit: contain;
   }
   .logo-tile-mitsubishi img {
-    transform: scale(3.4);
+    transform: scale(1.25);
+    padding: 0.25rem;
   }
   .footer-bottom {
     padding-top: 2rem;

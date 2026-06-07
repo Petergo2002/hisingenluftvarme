@@ -5,6 +5,7 @@ const staticPages = [
   "/",
   "/felsokning-luftvarmepump",
   "/installation-luftvarmepump",
+  "/luftvarmepump-pris",
   "/offert",
   "/produkter",
   "/projekt",

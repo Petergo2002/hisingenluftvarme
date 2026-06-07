@@ -4,7 +4,7 @@ export const SITE = {
   locale: "sv_SE",
   language: "sv-SE",
   brandLine: "Försäljning, installation, service och underhåll",
-  defaultDescription: "Hisingen Luftvärme hjälper kunder i Göteborg, Stenungsund och Lilla Edet med försäljning, installation, service och underhåll av luftvärmepumpar.",
+  defaultDescription: "Hisingen Luftvärme hjälper privatkunder i Göteborg, Stenungsund och Lilla Edet med luft-luftvärmepumpar, installation, service, felsökning och kostnadsfria hembesök.",
   defaultImage: "/images/hero.png",
   logo: "/hisingen_luftv%C3%A4rme_logo%20-%20Sebastian%20Fihn.png",
   mainMessage: "Försäljning, installation, service och underhåll - vi är med hela vägen.",
@@ -16,6 +16,14 @@ export const SITE = {
   address: "Hildedalsgatan 200, 417 05 Göteborg",
   addressHref: "https://www.google.com/maps/search/?api=1&query=Hildedalsgatan%20200%2C%20417%2005%20G%C3%B6teborg",
   responseTime: "Vi hör oftast av oss inom 24 timmar.",
+};
+
+export const BUSINESS_ADDRESS = {
+  streetAddress: "Hildedalsgatan 200",
+  postalCode: "417 05",
+  addressLocality: "Göteborg",
+  addressRegion: "Västra Götaland",
+  addressCountry: "SE",
 };
 
 export const SERVICE_IMAGES = {
@@ -30,6 +38,51 @@ export const AREA_LINKS = [
   { name: "Stenungsund", link: "/luftvarmepump-stenungsund" },
   { name: "Lilla Edet", link: "/luftvarmepump-lilla-edet" },
 ];
+
+export const SERVICE_AREA_SCHEMA = AREA_LINKS.map((area) => ({
+  "@type": "City",
+  name: area.name,
+  url: new URL(area.link, SITE.url).toString(),
+}));
+
+export const SERVICE_CATALOG = [
+  {
+    name: "Försäljning av luftvärmepump",
+    shortName: "Försäljning",
+    serviceType: "Försäljning och rådgivning för luft-luftvärmepumpar",
+    description: "Jämför luftvärmepumpar med pris efter ROT-avdrag och standardinstallation.",
+    link: "/produkter",
+    image: SERVICE_IMAGES.hero,
+    imageAlt: "Luftvärmepump för villa, radhus och fritidshus",
+  },
+  {
+    name: "Installation av luftvärmepump",
+    shortName: "Installation",
+    serviceType: "Installation av luft-luftvärmepump",
+    description: "Fackmässig installation med rådgivning, standardinstallation och ROT-avdrag i Göteborg, Stenungsund och Lilla Edet.",
+    link: "/installation-luftvarmepump",
+    image: SERVICE_IMAGES.installation,
+    imageAlt: "Installation av luftvärmepump i villa",
+  },
+  {
+    name: "Service av luftvärmepump",
+    shortName: "Service",
+    serviceType: "Service och underhåll av luft-luftvärmepump",
+    description: "Service och underhåll som hjälper luftvärmepumpen att behålla god effekt, renare luft och längre livslängd.",
+    link: "/service-luftvarmepump",
+    image: SERVICE_IMAGES.service,
+    imageAlt: "Professionell service av luftvärmepump",
+  },
+  {
+    name: "Felsökning av luftvärmepump",
+    shortName: "Felsökning",
+    serviceType: "Felsökning av luft-luftvärmepump",
+    description: "Felsökning vid felkod, missljud, sämre värme, sämre kyla eller annan driftstörning.",
+    link: "/felsokning-luftvarmepump",
+    image: SERVICE_IMAGES.troubleshooting,
+    imageAlt: "Tekniker felsöker luftvärmepump",
+  },
+] as const;
 
 export interface Product {
   name: string;

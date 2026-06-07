@@ -2,10 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/Container.astro';
 import CTASection from '../components/CTASection.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { SITE } from '../data/site';
 
-const title = `Referensprojekt luftvärmepump | ${SITE.name}`;
-const description = "Se tidigare installationer och servicejobb för luftvärmepumpar i Göteborg, Stenungsund och Lilla Edet.";
+const title = "Referensprojekt luftvärmepump Göteborg | Installation & service";
+const description = "Se tidigare installationer och servicejobb för luftvärmepumpar i Göteborg, Stenungsund och Lilla Edet med Hisingen Luftvärme.";
 
 const projects = [
   {
@@ -39,6 +40,7 @@ const projectListSchema = {
     position: index + 1,
     item: {
       "@type": "CreativeWork",
+      "@id": `${new URL("/projekt", SITE.url).toString()}#${project.id}`,
       name: project.title,
       description: project.description,
       locationCreated: {
@@ -56,6 +58,7 @@ const projectListSchema = {
 ---
 
 <BaseLayout title={title} description={description} image="/Installerad%20CZ25%20-%20Sebastian%20Fihn.jpg" structuredData={projectListSchema}>
+  <Breadcrumbs crumbs={[{ text: "Referensprojekt" }]} />
 
   <!-- Page hero header -->
   <div class="page-header">

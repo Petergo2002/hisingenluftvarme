@@ -7,22 +7,14 @@ import BenefitsSection from '../components/BenefitsSection.astro';
 import AreaCard from '../components/AreaCard.astro';
 import FAQSection from '../components/FAQSection.astro';
 import CTASection from '../components/CTASection.astro';
-import { SITE } from '../data/site';
+import { SERVICE_AREA_SCHEMA, SERVICE_CATALOG, SITE } from '../data/site';
 import { PRIORITY_AREAS } from '../data/areas';
 
 // SEO Metadata
-const title = "Luftvärmepump Göteborg | Hisingen Luftvärme";
-const description = "Hisingen Luftvärme hjälper kunder i Göteborg, Stenungsund och Lilla Edet med försäljning, installation, service och underhåll av luftvärmepumpar.";
+const title = "Luftvärmepump Göteborg | Installation & service";
+const description = "Luftvärmepump i Göteborg, Stenungsund och Lilla Edet. Hisingen Luftvärme hjälper med rådgivning, installation, service, felsökning och kostnadsfria hembesök.";
 
 const services = [
-  {
-    eyebrow: "Hembesök",
-    title: "Kostnadsfria hembesök",
-    description: "Vi utför kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet för att hitta den bästa lösningen för ditt hus.",
-    link: "/offert",
-    image: "/images/hero.png",
-    imageAlt: "Hembesök inför val av luftvärmepump"
-  },
   {
     eyebrow: "Installation",
     title: "Installation av luftvärmepump",
@@ -38,6 +30,14 @@ const services = [
     link: "/service-luftvarmepump",
     image: "/images/service-maintenance.png",
     imageAlt: "Professionell service av luftvärmepump"
+  },
+  {
+    eyebrow: "Felsökning",
+    title: "Problem med luftvärmepump",
+    description: "Vi hjälper dig vidare vid felkod, missljud, sämre värme, sämre kyla eller andra driftproblem med din luftvärmepump.",
+    link: "/felsokning-luftvarmepump",
+    image: "/images/service-troubleshooting.png",
+    imageAlt: "Felsökning av luftvärmepump"
   }
 ];
 
@@ -71,18 +71,20 @@ const areas = PRIORITY_AREAS.map((area) => ({
 const serviceListSchema = {
   "@type": "ItemList",
   name: "Tjänster från Hisingen Luftvärme",
-  itemListElement: services.map((service, index) => ({
+  itemListElement: SERVICE_CATALOG.map((service, index) => ({
     "@type": "ListItem",
     position: index + 1,
     item: {
       "@type": "Service",
-      name: service.title,
+      "@id": `${new URL(service.link, SITE.url).toString()}#service`,
+      name: service.name,
+      serviceType: service.serviceType,
       description: service.description,
       url: new URL(service.link, SITE.url).toString(),
       provider: {
         "@id": `${SITE.url}/#business`,
       },
-      areaServed: SITE.area,
+      areaServed: SERVICE_AREA_SCHEMA,
     },
   })),
 };
@@ -99,6 +101,10 @@ const faqs = [
   { 
     question: "Hur ofta bör en luftvärmepump servas?", 
     answer: "En luftvärmepump bör servas med 2–3 års intervall för att säkerställa god effekt. Om pumpen beter sig konstigt eller visar felkod ska du kontakta oss." 
+  },
+  {
+    question: "Vilka områden prioriterar ni?",
+    answer: "Vi prioriterar Göteborg, Stenungsund och Lilla Edet och hjälper privatkunder med luftvärmepump, installation, service och felsökning i de områdena."
   }
 ];
 ---
@@ -107,7 +113,7 @@ const faqs = [
   <HeroSection 
     eyebrow="Din lokala kyltekniker i Göteborg, Stenungsund och Lilla Edet"
     title="Hisingen Luftvärme"
-    description={SITE.mainMessage}
+    description="Luftvärmepump i Göteborg med hjälp från rådgivning och modellval till installation, service och felsökning."
     primaryCTA={{ text: "Begär kostnadsfri offert", link: "/offert" }}
     secondaryCTA={{ text: "Se våra produkter", link: "/produkter" }}
     image="/images/hero.png"
@@ -126,8 +132,8 @@ const faqs = [
     <Container>
       <div class="section-header text-center">
         <span class="eyebrow">Tjänster</span>
-        <h2 class="text-white">Vad vi kan hjälpa dig med</h2>
-        <p class="text-muted">Försäljning, installation, service och underhåll i Göteborg, Stenungsund och Lilla Edet.</p>
+        <h2 class="text-white">Luftvärmepump från första råd till färdig service</h2>
+        <p class="text-muted">Försäljning, installation, service och felsökning i Göteborg, Stenungsund och Lilla Edet.</p>
       </div>
       <div class="services-grid">
         {services.map(service => (
@@ -177,7 +183,7 @@ const faqs = [
   }
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
   .areas-grid {

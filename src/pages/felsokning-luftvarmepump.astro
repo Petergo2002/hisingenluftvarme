@@ -7,11 +7,11 @@ import AreaCard from '../components/AreaCard.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import FAQSection from '../components/FAQSection.astro';
 import CTASection from '../components/CTASection.astro';
-import { AREA_LINKS, SITE } from '../data/site';
+import { AREA_LINKS, SERVICE_AREA_SCHEMA, SITE } from '../data/site';
 
 const serviceName = "Problem med luftvärmepump";
-const title = "Felsökning luftvärmepump | Hisingen Luftvärme";
-const description = "Felsökning av luftvärmepump i Göteborg, Stenungsund och Lilla Edet vid felkod, sämre effekt eller konstiga ljud.";
+const title = "Felsökning luftvärmepump Göteborg | Felkod & dålig värme";
+const description = "Felsökning av luftvärmepump i Göteborg, Stenungsund och Lilla Edet vid felkod, missljud, sämre värme, sämre kyla eller konstig drift.";
 
 const areas = AREA_LINKS;
 
@@ -39,24 +39,39 @@ const otherServices = [
   }
 ];
 
+const troubleshootingChecks = [
+  {
+    title: "Felkod i displayen",
+    text: "Skriv gärna ner felkoden och när den visas. Det gör det lättare att bedöma om felet kan lösas med kontroll, service eller vidare åtgärd.",
+  },
+  {
+    title: "Sämre värme eller kyla",
+    text: "Lägre effekt kan bero på smuts, luftflöde, inställningar, placering eller tekniskt fel. Vi hjälper dig sortera vad som är mest sannolikt.",
+  },
+  {
+    title: "Missljud eller vibrationer",
+    text: "Nya ljud, vibrationer eller konstigt beteende bör kontrolleras i tid, särskilt om pumpen används som viktig värmekälla.",
+  },
+];
+
 const faqs = [
-  { question: "Min värmepump visar en felkod, vad ska jag göra?", answer: "Kontakta oss om pumpen visar felkod, beter sig konstigt eller ger sämre effekt." },
+  { question: "Min värmepump visar en felkod, vad ska jag göra?", answer: "Anteckna felkoden och kontakta oss. Beskriv gärna modell, när felet uppstår och om pumpen fortfarande värmer eller kyler." },
   { question: "Hur ofta bör pumpen servas?", answer: "En luftvärmepump bör servas med 2–3 års intervall för att säkerställa god effekt." },
-  { question: "Hjälper ni kunder i Göteborg, Stenungsund och Lilla Edet?", answer: "Ja, vi hjälper kunder i Göteborg, Stenungsund och Lilla Edet." }
+  { question: "Hjälper ni kunder i Göteborg, Stenungsund och Lilla Edet?", answer: "Ja, vi hjälper kunder i Göteborg, Stenungsund och Lilla Edet." },
+  { question: "Varför värmer luftvärmepumpen sämre än tidigare?", answer: "Det kan bero på smuts, försämrat luftflöde, inställningar, placering, väderförhållanden eller tekniskt fel. Vi kan kontrollera pumpen och rekommendera nästa steg." },
+  { question: "Ska jag stänga av pumpen om den låter konstigt?", answer: "Om pumpen låter ovanligt mycket, vibrerar kraftigt eller beter sig onormalt är det klokt att kontakta oss och beskriva problemet innan du fortsätter använda den hårt." }
 ];
 
 const serviceSchema = {
   "@type": "Service",
+  "@id": `${new URL("/felsokning-luftvarmepump", SITE.url).toString()}#service`,
   name: serviceName,
   serviceType: "Felsökning av luftvärmepump",
   description,
   provider: {
     "@id": `${SITE.url}/#business`,
   },
-  areaServed: AREA_LINKS.map((area) => ({
-    "@type": "City",
-    name: area.name,
-  })),
+  areaServed: SERVICE_AREA_SCHEMA,
   url: new URL("/felsokning-luftvarmepump", SITE.url).toString(),
 };
 ---
@@ -66,7 +81,7 @@ const serviceSchema = {
 
   <HeroSection 
     title={serviceName}
-    description="Kontakta oss om din luftvärmepump beter sig konstigt, visar felkod eller ger sämre effekt."
+    description="Felsökning vid felkod, missljud, dålig värme, svag kyla eller andra driftproblem. Vi hjälper kunder i Göteborg, Stenungsund och Lilla Edet vidare."
     primaryCTA={{ text: "Kontakta oss", link: "/offert" }}
     image="/images/service-troubleshooting.png"
     imageAlt="Tekniker utför felsökning på luftvärmepump"
@@ -78,6 +93,7 @@ const serviceSchema = {
         <div class="main-content">
           <h2>När pumpen inte fungerar som den ska</h2>
           <p>Om pumpen beter sig konstigt, visar felkod eller inte ger samma effekt som tidigare ska du kontakta oss. I många fall kan service eller kontroll behövas för att säkerställa god drift.</p>
+          <p>Ju tydligare du beskriver felet, desto bättre kan vi hjälpa dig vidare. Skriv gärna ner modell, felkod, när problemet började och om pumpen fortfarande värmer eller kyler.</p>
           
           <h3>Kontakta oss vid:</h3>
           <ul>
@@ -92,6 +108,20 @@ const serviceSchema = {
   </section>
 
   <section class="section-padding bg-light">
+    <Container>
+      <h2>Vanliga felsökningslägen</h2>
+      <div class="needs-grid">
+        {troubleshootingChecks.map((item) => (
+          <article class="need-item">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-padding">
     <Container>
       <h2>Service och underhåll</h2>
       <div class="needs-grid">
@@ -111,9 +141,10 @@ const serviceSchema = {
     </Container>
   </section>
 
-  <section class="section-padding">
+  <section class="section-padding bg-light">
     <Container>
       <h2>Vi hjälper kunder i vårt område</h2>
+      <p class="section-copy">Vi prioriterar felsökning och service i Göteborg, Stenungsund och Lilla Edet. Läs gärna mer om respektive område om du vill se lokal information innan du skickar offertförfrågan.</p>
       <div class="areas-grid">
         {areas.map(area => (
           <AreaCard {...area} />
@@ -122,7 +153,7 @@ const serviceSchema = {
     </Container>
   </section>
 
-  <section class="section-padding bg-light">
+  <section class="section-padding">
     <Container>
       <h2>Andra tjänster</h2>
       <div class="services-grid">
@@ -165,6 +196,15 @@ const serviceSchema = {
   .need-item h3 {
     margin-bottom: 1rem;
     font-size: 1.25rem;
+  }
+  .need-item p,
+  .section-copy {
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .section-copy {
+    max-width: 760px;
+    margin-top: 1rem;
   }
   .main-content h2, .main-content h3 {
     text-transform: none;
