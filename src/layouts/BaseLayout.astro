@@ -2,7 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-import { BUSINESS_ADDRESS, SERVICE_AREA_SCHEMA, SERVICE_CATALOG, SITE } from '../data/site';
+import { BUSINESS_ADDRESS, LOCAL_SEO_KEYWORDS, SERVICE_AREA_SCHEMA, SERVICE_CATALOG, SITE } from '../data/site';
 
 interface Props {
   title: string;
@@ -54,6 +54,11 @@ const serviceOfferings = SERVICE_CATALOG.map((service) => ({
     url: new URL(service.link, SITE.url).toString(),
   },
 }));
+const offerCatalog = {
+  "@type": "OfferCatalog",
+  name: "Tjänster för luftvärmepump",
+  itemListElement: serviceOfferings,
+};
 const schemaGraph = {
   "@context": "https://schema.org",
   "@graph": [
@@ -83,15 +88,9 @@ const schemaGraph = {
       },
       hasMap: SITE.addressHref,
       areaServed: SERVICE_AREA_SCHEMA,
-      knowsAbout: [
-        "luftvärmepump",
-        "luft-luftvärmepump",
-        "installation av luftvärmepump",
-        "service av luftvärmepump",
-        "felsökning av luftvärmepump",
-        "ROT-avdrag",
-      ],
+      knowsAbout: LOCAL_SEO_KEYWORDS,
       makesOffer: serviceOfferings,
+      hasOfferCatalog: offerCatalog,
       contactPoint: {
         "@type": "ContactPoint",
         telephone: "+46766443438",
@@ -125,6 +124,7 @@ const schemaGraph = {
       about: {
         "@id": businessId,
       },
+      dateModified: SITE.lastUpdated,
       inLanguage: SITE.language,
       primaryImageOfPage: {
         "@type": "ImageObject",

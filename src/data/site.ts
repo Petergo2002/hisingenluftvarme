@@ -6,6 +6,7 @@ export const SITE = {
   brandLine: "Försäljning, installation, service och underhåll",
   defaultDescription: "Hisingen Luftvärme hjälper privatkunder i Göteborg, Stenungsund och Lilla Edet med luft-luftvärmepumpar, installation, service, felsökning och kostnadsfria hembesök.",
   defaultImage: "/images/hero.png",
+  lastUpdated: "2026-06-30",
   logo: "/hisingen_luftv%C3%A4rme_logo%20-%20Sebastian%20Fihn.png",
   mainMessage: "Försäljning, installation, service och underhåll - vi är med hela vägen.",
   area: "Göteborg, Stenungsund och Lilla Edet",
@@ -83,6 +84,17 @@ export const SERVICE_CATALOG = [
     imageAlt: "Tekniker felsöker luftvärmepump",
   },
 ] as const;
+
+export const LOCAL_SEO_KEYWORDS = [
+  "luftvärmepump Göteborg",
+  "luftvärmepump Stenungsund",
+  "luftvärmepump Lilla Edet",
+  "installation av luftvärmepump",
+  "service av luftvärmepump",
+  "felsökning av luftvärmepump",
+  "luft-luftvärmepump",
+  "ROT-avdrag",
+];
 
 export interface Product {
   name: string;

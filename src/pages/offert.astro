@@ -53,15 +53,15 @@ const contactPageSchema = {
           <div class="form-grid">
             <label>
               <span>Namn</span>
-              <input type="text" name="Namn" placeholder="Ditt namn" required />
+              <input type="text" name="Namn" placeholder="Ditt namn" autocomplete="name" required />
             </label>
             <label>
               <span>E-post</span>
-              <input type="email" name="E-post" placeholder={SITE.email} required />
+              <input type="email" name="E-post" placeholder={SITE.email} autocomplete="email" required />
             </label>
             <label>
               <span>Telefon</span>
-              <input type="tel" name="Telefon" placeholder="Telefonnummer" required />
+              <input type="tel" name="Telefon" placeholder="Telefonnummer" autocomplete="tel" required />
             </label>
             <label>
               <span>Tjänst</span>
@@ -75,7 +75,7 @@ const contactPageSchema = {
             </label>
             <label>
               <span>Område</span>
-              <select name="Område" required>
+              <select name="Område" autocomplete="address-level2" required>
                 <option value="">Välj område</option>
                 {AREA_LINKS.map((area) => <option value={area.name}>{area.name}</option>)}
               </select>

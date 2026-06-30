@@ -2,44 +2,44 @@ import { PRIORITY_AREAS } from "../data/areas";
 import { SITE } from "../data/site";
 
 const staticPages = [
-  "/",
-  "/felsokning-luftvarmepump",
-  "/installation-luftvarmepump",
-  "/luftvarmepump-pris",
-  "/offert",
-  "/produkter",
-  "/projekt",
-  "/service-luftvarmepump",
+  { path: "/", changefreq: "weekly", priority: "1.0" },
+  { path: "/produkter", changefreq: "weekly", priority: "0.9" },
+  { path: "/luftvarmepump-pris", changefreq: "weekly", priority: "0.9" },
+  { path: "/installation-luftvarmepump", changefreq: "monthly", priority: "0.8" },
+  { path: "/service-luftvarmepump", changefreq: "monthly", priority: "0.8" },
+  { path: "/felsokning-luftvarmepump", changefreq: "monthly", priority: "0.8" },
+  { path: "/projekt", changefreq: "monthly", priority: "0.7" },
+  { path: "/offert", changefreq: "monthly", priority: "0.7" },
 ];
 
-const pagePaths = [
+const pageEntries = [
   ...staticPages,
-  ...PRIORITY_AREAS.map((area) => area.url),
+  ...PRIORITY_AREAS.map((area) => ({
+    path: area.url,
+    changefreq: "weekly",
+    priority: "0.9",
+  })),
 ];
 
-function sitemapUrl(path: string, lastmod: string) {
+function sitemapUrl(entry: (typeof pageEntries)[number]) {
+  const { path, changefreq, priority } = entry;
   const url = new URL(path, SITE.url);
-  const pathname = url.pathname;
-  const isHome = pathname === "/";
-  const isLocalPage = pathname.startsWith("/luftvarmepump-");
 
   return [
     "  <url>",
     `    <loc>${url.toString()}</loc>`,
-    `    <lastmod>${lastmod}</lastmod>`,
-    `    <changefreq>${isHome || isLocalPage ? "weekly" : "monthly"}</changefreq>`,
-    `    <priority>${isHome ? "1.0" : isLocalPage ? "0.9" : "0.7"}</priority>`,
+    `    <lastmod>${SITE.lastUpdated}</lastmod>`,
+    `    <changefreq>${changefreq}</changefreq>`,
+    `    <priority>${priority}</priority>`,
     "  </url>",
   ].join("\n");
 }
 
 export function buildSitemapXml() {
-  const lastmod = new Date().toISOString();
-
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    ...pagePaths.map((path) => sitemapUrl(path, lastmod)),
+    ...pageEntries.map((entry) => sitemapUrl(entry)),
     "</urlset>",
   ].join("\n");
 }

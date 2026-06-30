@@ -23,6 +23,7 @@ const isServicePage = serviceLinks.some(({ href }) => isCurrent(href));
         <ul class="nav-links">
           <li><a href="/" aria-current={isCurrent('/') ? 'page' : undefined}>Start</a></li>
           <li><a href="/produkter" aria-current={isCurrent('/produkter') ? 'page' : undefined}>Produkter</a></li>
+          <li><a href="/luftvarmepump-pris" aria-current={isCurrent('/luftvarmepump-pris') ? 'page' : undefined}>Priser</a></li>
           <li class="nav-dropdown">
             <details data-nav-dropdown>
               <summary class:list={{ active: isServicePage }}>
@@ -69,6 +70,7 @@ const isServicePage = serviceLinks.some(({ href }) => isCurrent(href));
           <ul class="mobile-nav-links">
             <li><a href="/" aria-current={isCurrent('/') ? 'page' : undefined}>Start</a></li>
             <li><a href="/produkter" aria-current={isCurrent('/produkter') ? 'page' : undefined}>Produkter</a></li>
+            <li><a href="/luftvarmepump-pris" aria-current={isCurrent('/luftvarmepump-pris') ? 'page' : undefined}>Priser</a></li>
             <li>
               <details class="mobile-services" open={isServicePage}>
                 <summary class:list={{ active: isServicePage }}>
