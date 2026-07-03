@@ -15,12 +15,13 @@ const { crumbs } = Astro.props;
 const allCrumbs = [{ text: "Start", link: "/" }, ...crumbs];
 const currentPath = Astro.url.pathname;
 const absoluteUrl = (path: string) => new URL(path, SITE.url).toString();
+const schemaPath = (path: string) => path.split("#")[0] || "/";
 const crumbItemUrl = (crumb: Crumb, index: number) => {
   if (crumb.link) {
-    return absoluteUrl(crumb.link);
+    return absoluteUrl(schemaPath(crumb.link));
   }
 
-  return index === allCrumbs.length - 1 ? absoluteUrl(currentPath) : absoluteUrl("/");
+  return index === allCrumbs.length - 1 ? absoluteUrl(schemaPath(currentPath)) : absoluteUrl("/");
 };
 const breadcrumbSchema = {
   "@context": "https://schema.org",

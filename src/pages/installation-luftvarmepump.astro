@@ -10,15 +10,15 @@ import CTASection from '../components/CTASection.astro';
 import { AREA_LINKS, INSTALLATION_ADDONS, INSTALLATION_INCLUDED, ROT_TERMS, SERVICE_AREA_SCHEMA, SITE } from '../data/site';
 
 const serviceName = "Installation av luftvärmepump";
-const title = "Installation av luftvärmepump Göteborg | Hisingen Luftvärme";
-const description = "Installation av luftvärmepump i Göteborg, Stenungsund och Lilla Edet. Kostnadsfritt hembesök, tydlig standardinstallation, ROT-avdrag och rådgivning.";
+const title = "Installation av luftvärmepump Hisingen & Göteborg | Hisingen Luftvärme";
+const description = "Installation av luftvärmepump på Hisingen, i Göteborg, Stenungsund och Lilla Edet. Kostnadsfritt hembesök, tydlig standardinstallation, ROT-avdrag och rådgivning.";
 
 const areas = AREA_LINKS;
 
 const otherServices = [
   {
     title: "Hembesök",
-    description: "Vi utför kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet för att hitta bästa lösningen för ditt hus.",
+    description: "Vi utför kostnadsfria hembesök på Hisingen, i Göteborg, Stenungsund och Lilla Edet för att hitta bästa lösningen för ditt hus.",
     link: "/offert",
     image: "/images/hero.png",
     imageAlt: "Hembesök inför installation"
@@ -62,7 +62,7 @@ const faqs = [
   { question: "Vad ingår i en standardinstallation?", answer: "Standardinstallationen innehåller bland annat framkörning, väggkonsol, vibrationsdämpare, upp till 5 meter isolerade kopparrör, kabeldragning, plastkanal, håltagning, vakuumsugning, driftsättning och genomgång av fjärrkontrollen." },
   { question: "Kan tillägg behövas?", answer: "Ja, extra rör, kabel eller andra tillägg kan behövas beroende på förutsättningarna. Exempel är markstativ, skyddstak, betonghåltagning eller arbete på höjd." },
   { question: "Hur fungerar ROT-avdraget?", answer: "Hisingen Luftvärme gör avdraget direkt på fakturan och ansöker om ersättning från Skatteverket. Kunden ansvarar för att villkoren för ROT-avdrag är uppfyllda." },
-  { question: "Gör ni hembesök innan installation?", answer: "Ja, vi gör kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet när vi behöver se huset, planlösningen och installationsförutsättningarna på plats." },
+  { question: "Gör ni hembesök innan installation?", answer: "Ja, vi gör kostnadsfria hembesök på Hisingen, i Göteborg, Stenungsund och Lilla Edet när vi behöver se huset, planlösningen och installationsförutsättningarna på plats." },
   { question: "Kan ni byta ut en äldre luftvärmepump?", answer: "Ja, vi kan hjälpa till när en äldre pump ska ersättas. Vi kontrollerar placering, rördragning och om den nya modellen bör sitta på samma plats eller flyttas." }
 ];
 
@@ -85,7 +85,7 @@ const serviceSchema = {
 
   <HeroSection 
     title={serviceName}
-    description="Fackmässig installation av luftvärmepump i Göteborg, Stenungsund och Lilla Edet med hembesök, tydlig offert, ROT-avdrag och genomgång när pumpen är driftsatt."
+    description="Fackmässig installation av luftvärmepump på Hisingen, i Göteborg, Stenungsund och Lilla Edet med hembesök, tydlig offert, ROT-avdrag och genomgång när pumpen är driftsatt."
     primaryCTA={{ text: "Begär offert", link: "/offert" }}
     image="/images/service-installation.jpg"
     imageAlt="Installation av luftvärmepump utomhus"
@@ -96,7 +96,7 @@ const serviceSchema = {
       <div class="content-grid">
         <div class="main-content">
           <h2>Professionell hjälp från start till mål</h2>
-          <p>{SITE.mainMessage} Vi hjälper dig i Göteborg, Stenungsund och Lilla Edet och gör kostnadsfria hembesök för att hitta rätt luft-luftvärmepump, rätt placering och en installation som fungerar över tid.</p>
+          <p>{SITE.mainMessage} Vi hjälper dig på Hisingen, i Göteborg, Stenungsund och Lilla Edet och gör kostnadsfria hembesök för att hitta rätt luft-luftvärmepump, rätt placering och en installation som fungerar över tid.</p>
           <p>En bra installation handlar inte bara om att få upp en maskin på väggen. Vi går igenom luftflöde, ljudnivå, väggmaterial, placering av utedel, kondensvatten och framtida service så att pumpen kan ge bra effekt i vardagen.</p>
           
           <h3>Vad ingår i vår installation?</h3>
@@ -150,8 +150,8 @@ const serviceSchema = {
 
   <section class="section-padding bg-light">
     <Container>
-      <h2>Vi installerar i våra tre områden</h2>
-      <p class="section-copy">Välj område om du vill läsa mer om lokala förutsättningar, vanliga hustyper och hur vi tänker kring placering i just Göteborg, Stenungsund eller Lilla Edet.</p>
+      <h2>Vi installerar i våra prioriterade områden</h2>
+      <p class="section-copy">Välj område om du vill läsa mer om lokala förutsättningar, vanliga hustyper och hur vi tänker kring placering på Hisingen, i Göteborg, Stenungsund eller Lilla Edet.</p>
       <div class="areas-grid">
         {areas.map(area => (
           <AreaCard {...area} />
@@ -175,7 +175,7 @@ const serviceSchema = {
 
   <CTASection 
     title="Redo att installera?"
-    description="Kontakta oss för en kostnadsfri offert eller ett hembesök i Göteborg, Stenungsund eller Lilla Edet."
+    description="Kontakta oss för en kostnadsfri offert eller ett hembesök på Hisingen, i Göteborg, Stenungsund eller Lilla Edet."
     buttonText="Begär offert nu"
     buttonLink="/offert"
   />

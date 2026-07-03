@@ -11,8 +11,8 @@ import { SERVICE_AREA_SCHEMA, SERVICE_CATALOG, SITE } from '../data/site';
 import { PRIORITY_AREAS } from '../data/areas';
 
 // SEO Metadata
-const title = "Luftvärmepump Göteborg | Installation & service";
-const description = "Luftvärmepump i Göteborg, Stenungsund och Lilla Edet. Hisingen Luftvärme hjälper med rådgivning, installation, service, felsökning och kostnadsfria hembesök.";
+const title = "Luftvärmepump Hisingen & Göteborg | Installation & service";
+const description = "Luftvärmepump på Hisingen och i Göteborg, Stenungsund och Lilla Edet. Hisingen Luftvärme hjälper med rådgivning, installation, service, felsökning och kostnadsfria hembesök.";
 
 const services = [
   {
@@ -49,7 +49,7 @@ const clockIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24
 const activityIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`;
 
 const trustBenefits = [
-  { title: "Kostnadsfritt hembesök", description: "Vi kommer ut i Göteborg, Stenungsund och Lilla Edet och ser över vilken lösning som bäst passar huset.", icon: userIcon, link: "/offert" },
+  { title: "Kostnadsfritt hembesök", description: "Vi kommer ut på Hisingen, i Göteborg, Stenungsund och Lilla Edet och ser över vilken lösning som bäst passar huset.", icon: userIcon, link: "/offert" },
   { title: "Installation", description: "Standardinstallationen täcker de flesta installationer och tydliggör eventuella tillägg i förväg.", icon: shieldIcon, link: "/installation-luftvarmepump" },
   { title: "Service", description: "Service med rätt intervall hjälper pumpen att behålla god effekt över tid.", icon: checkIcon, link: "/service-luftvarmepump" },
   { title: "ROT-avdrag", description: "Vi gör ROT-avdraget direkt på fakturan och ansöker om ersättning från Skatteverket.", icon: fileIcon, link: "/installation-luftvarmepump#rot-avdrag" }
@@ -92,7 +92,7 @@ const serviceListSchema = {
 const faqs = [
   { 
     question: "Erbjuder ni kostnadsfria hembesök?", 
-    answer: "Ja, vi utför kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet för att hitta den bästa lösningen för kundens hus." 
+    answer: "Ja, vi utför kostnadsfria hembesök på Hisingen, i Göteborg, Stenungsund och Lilla Edet för att hitta den bästa lösningen för kundens hus." 
   },
   { 
     question: "Vad ingår i priset för produkterna?", 
@@ -104,16 +104,16 @@ const faqs = [
   },
   {
     question: "Vilka områden prioriterar ni?",
-    answer: "Vi prioriterar Göteborg, Stenungsund och Lilla Edet och hjälper privatkunder med luftvärmepump, installation, service och felsökning i de områdena."
+    answer: "Vi prioriterar Hisingen, Göteborg, Stenungsund och Lilla Edet och hjälper privatkunder med luftvärmepump, installation, service och felsökning i de områdena."
   }
 ];
 ---
 
 <BaseLayout title={title} description={description} image="/images/hero.png" structuredData={serviceListSchema}>
   <HeroSection 
-    eyebrow="Din lokala kyltekniker i Göteborg, Stenungsund och Lilla Edet"
+    eyebrow="Din lokala kyltekniker på Hisingen, i Göteborg, Stenungsund och Lilla Edet"
     title="Hisingen Luftvärme"
-    description="Luftvärmepump i Göteborg med hjälp från rådgivning och modellval till installation, service och felsökning."
+    description="Luftvärmepump på Hisingen och i Göteborg med hjälp från rådgivning och modellval till installation, service och felsökning."
     primaryCTA={{ text: "Begär kostnadsfri offert", link: "/offert" }}
     secondaryCTA={{ text: "Se våra produkter", link: "/produkter" }}
     image="/images/hero.png"
@@ -133,7 +133,7 @@ const faqs = [
       <div class="section-header text-center">
         <span class="eyebrow">Tjänster</span>
         <h2 class="text-white">Luftvärmepump från första råd till färdig service</h2>
-        <p class="text-muted">Försäljning, installation, service och felsökning i Göteborg, Stenungsund och Lilla Edet.</p>
+        <p class="text-muted">Försäljning, installation, service och felsökning på Hisingen, i Göteborg, Stenungsund och Lilla Edet.</p>
       </div>
       <div class="services-grid">
         {services.map(service => (

@@ -1,15 +1,15 @@
 export const SITE = {
   name: "Hisingen Luftvärme",
-  url: "https://hisingenluftvarme.se",
+  url: "https://www.hisingenluftvarme.se",
   locale: "sv_SE",
   language: "sv-SE",
   brandLine: "Försäljning, installation, service och underhåll",
-  defaultDescription: "Hisingen Luftvärme hjälper privatkunder i Göteborg, Stenungsund och Lilla Edet med luft-luftvärmepumpar, installation, service, felsökning och kostnadsfria hembesök.",
+  defaultDescription: "Hisingen Luftvärme hjälper privatkunder på Hisingen, i Göteborg, Stenungsund och Lilla Edet med luft-luftvärmepumpar, installation, service, felsökning och kostnadsfria hembesök.",
   defaultImage: "/images/hero.png",
-  lastUpdated: "2026-06-30",
+  lastUpdated: "2026-07-03",
   logo: "/hisingen_luftv%C3%A4rme_logo%20-%20Sebastian%20Fihn.png",
   mainMessage: "Försäljning, installation, service och underhåll - vi är med hela vägen.",
-  area: "Göteborg, Stenungsund och Lilla Edet",
+  area: "Hisingen, Göteborg, Stenungsund och Lilla Edet",
   phoneDisplay: "0766 44 34 38",
   phoneHref: "tel:+46766443438",
   email: "info@hisingenluftvarme.se",
@@ -35,6 +35,7 @@ export const SERVICE_IMAGES = {
 };
 
 export const AREA_LINKS = [
+  { name: "Hisingen", link: "/luftvarmepump-hisingen" },
   { name: "Göteborg", link: "/luftvarmepump-goteborg" },
   { name: "Stenungsund", link: "/luftvarmepump-stenungsund" },
   { name: "Lilla Edet", link: "/luftvarmepump-lilla-edet" },
@@ -60,7 +61,7 @@ export const SERVICE_CATALOG = [
     name: "Installation av luftvärmepump",
     shortName: "Installation",
     serviceType: "Installation av luft-luftvärmepump",
-    description: "Fackmässig installation med rådgivning, standardinstallation och ROT-avdrag i Göteborg, Stenungsund och Lilla Edet.",
+    description: "Fackmässig installation med rådgivning, standardinstallation och ROT-avdrag på Hisingen, i Göteborg, Stenungsund och Lilla Edet.",
     link: "/installation-luftvarmepump",
     image: SERVICE_IMAGES.installation,
     imageAlt: "Installation av luftvärmepump i villa",
@@ -86,6 +87,7 @@ export const SERVICE_CATALOG = [
 ] as const;
 
 export const LOCAL_SEO_KEYWORDS = [
+  "luftvärmepump Hisingen",
   "luftvärmepump Göteborg",
   "luftvärmepump Stenungsund",
   "luftvärmepump Lilla Edet",
@@ -237,7 +239,7 @@ export const PRODUCTS: Product[] = [
 ];
 
 export const INSTALLATION_INCLUDED = [
-  "Framkörning inom Göteborg, Stenungsund och Lilla Edet",
+  "Framkörning inom Hisingen, Göteborg, Stenungsund och Lilla Edet",
   "Väggkonsol till utedel",
   "Vibrationsdämpare mellan utedel och väggkonsol",
   "Isolerade kopparrör, upp till 5 meter",

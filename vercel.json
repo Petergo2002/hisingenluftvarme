@@ -1,0 +1,30 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "hisingenluftvarme.se"
+        }
+      ],
+      "destination": "https://www.hisingenluftvarme.se/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/Installation",
+      "destination": "/installation-luftvarmepump",
+      "permanent": true
+    },
+    {
+      "source": "/kontakt",
+      "destination": "/offert",
+      "permanent": true
+    },
+    {
+      "source": "/wp-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    }
+  ]
+}

@@ -11,14 +11,14 @@ import { AREA_LINKS, SERVICE_AREA_SCHEMA, SITE } from '../data/site';
 
 const serviceName = "Problem med luftvärmepump";
 const title = "Felsökning luftvärmepump Göteborg | Felkod & dålig värme";
-const description = "Felsökning av luftvärmepump i Göteborg, Stenungsund och Lilla Edet vid felkod, missljud, sämre värme, sämre kyla eller konstig drift.";
+const description = "Felsökning av luftvärmepump på Hisingen, i Göteborg, Stenungsund och Lilla Edet vid felkod, missljud, sämre värme, sämre kyla eller konstig drift.";
 
 const areas = AREA_LINKS;
 
 const otherServices = [
   {
     title: "Hembesök",
-    description: "Vi utför kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet för att hitta bästa lösningen för ditt hus.",
+    description: "Vi utför kostnadsfria hembesök på Hisingen, i Göteborg, Stenungsund och Lilla Edet för att hitta bästa lösningen för ditt hus.",
     link: "/offert",
     image: "/images/hero.png",
     imageAlt: "Hembesök inför val av luftvärmepump"
@@ -57,7 +57,7 @@ const troubleshootingChecks = [
 const faqs = [
   { question: "Min värmepump visar en felkod, vad ska jag göra?", answer: "Anteckna felkoden och kontakta oss. Beskriv gärna modell, när felet uppstår och om pumpen fortfarande värmer eller kyler." },
   { question: "Hur ofta bör pumpen servas?", answer: "En luftvärmepump bör servas med 2–3 års intervall för att säkerställa god effekt." },
-  { question: "Hjälper ni kunder i Göteborg, Stenungsund och Lilla Edet?", answer: "Ja, vi hjälper kunder i Göteborg, Stenungsund och Lilla Edet." },
+  { question: "Hjälper ni kunder på Hisingen, i Göteborg, Stenungsund och Lilla Edet?", answer: "Ja, vi hjälper kunder på Hisingen, i Göteborg, Stenungsund och Lilla Edet." },
   { question: "Varför värmer luftvärmepumpen sämre än tidigare?", answer: "Det kan bero på smuts, försämrat luftflöde, inställningar, placering, väderförhållanden eller tekniskt fel. Vi kan kontrollera pumpen och rekommendera nästa steg." },
   { question: "Ska jag stänga av pumpen om den låter konstigt?", answer: "Om pumpen låter ovanligt mycket, vibrerar kraftigt eller beter sig onormalt är det klokt att kontakta oss och beskriva problemet innan du fortsätter använda den hårt." }
 ];
@@ -81,7 +81,7 @@ const serviceSchema = {
 
   <HeroSection 
     title={serviceName}
-    description="Felsökning vid felkod, missljud, dålig värme, svag kyla eller andra driftproblem. Vi hjälper kunder i Göteborg, Stenungsund och Lilla Edet vidare."
+    description="Felsökning vid felkod, missljud, dålig värme, svag kyla eller andra driftproblem. Vi hjälper kunder på Hisingen, i Göteborg, Stenungsund och Lilla Edet vidare."
     primaryCTA={{ text: "Kontakta oss", link: "/offert" }}
     image="/images/service-troubleshooting.png"
     imageAlt="Tekniker utför felsökning på luftvärmepump"
@@ -144,7 +144,7 @@ const serviceSchema = {
   <section class="section-padding bg-light">
     <Container>
       <h2>Vi hjälper kunder i vårt område</h2>
-      <p class="section-copy">Vi prioriterar felsökning och service i Göteborg, Stenungsund och Lilla Edet. Läs gärna mer om respektive område om du vill se lokal information innan du skickar offertförfrågan.</p>
+      <p class="section-copy">Vi prioriterar felsökning och service på Hisingen, i Göteborg, Stenungsund och Lilla Edet. Läs gärna mer om respektive område om du vill se lokal information innan du skickar offertförfrågan.</p>
       <div class="areas-grid">
         {areas.map(area => (
           <AreaCard {...area} />

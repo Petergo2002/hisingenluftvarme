@@ -11,14 +11,14 @@ import { AREA_LINKS, SERVICE_AREA_SCHEMA, SITE } from '../data/site';
 
 const serviceName = "Service av luftvärmepump";
 const title = "Service av luftvärmepump Göteborg | Hisingen Luftvärme";
-const description = "Service av luftvärmepump i Göteborg, Stenungsund och Lilla Edet. Rengöring, kontroll, bättre effekt och hjälp vid felkod eller sämre värme.";
+const description = "Service av luftvärmepump på Hisingen, i Göteborg, Stenungsund och Lilla Edet. Rengöring, kontroll, bättre effekt och hjälp vid felkod eller sämre värme.";
 
 const areas = AREA_LINKS;
 
 const otherServices = [
   {
     title: "Hembesök",
-    description: "Vi utför kostnadsfria hembesök i Göteborg, Stenungsund och Lilla Edet för att hitta bästa lösningen för ditt hus.",
+    description: "Vi utför kostnadsfria hembesök på Hisingen, i Göteborg, Stenungsund och Lilla Edet för att hitta bästa lösningen för ditt hus.",
     link: "/offert",
     image: "/images/hero.png",
     imageAlt: "Hembesök inför val av luftvärmepump"
@@ -57,7 +57,7 @@ const serviceIncludes = [
 const faqs = [
   { question: "Hur ofta bör jag serva min luftvärmepump?", answer: "En luftvärmepump bör servas med 2–3 års intervall för att säkerställa god effekt." },
   { question: "När ska jag kontakta er?", answer: "Kontakta oss om pumpen beter sig konstigt, visar felkod eller om du märker att effekten blivit sämre." },
-  { question: "Utför ni service i Göteborg, Stenungsund och Lilla Edet?", answer: "Ja, vi hjälper kunder i Göteborg, Stenungsund och Lilla Edet med service och underhåll." },
+  { question: "Utför ni service på Hisingen, i Göteborg, Stenungsund och Lilla Edet?", answer: "Ja, vi hjälper kunder på Hisingen, i Göteborg, Stenungsund och Lilla Edet med service och underhåll." },
   { question: "Kan service ge bättre värme?", answer: "Ofta kan rengöring och kontroll hjälpa pumpen att arbeta bättre, särskilt om luftflödet har försämrats eller pumpen inte servats på länge." },
   { question: "Servar ni äldre luftvärmepumpar?", answer: "Ja, vi kan kontrollera äldre pumpar och ge råd om det är rimligt att serva vidare eller om ett byte till en ny modell bör övervägas." }
 ];
@@ -81,7 +81,7 @@ const serviceSchema = {
 
   <HeroSection 
     title={serviceName}
-    description="Service och underhåll för luftvärmepumpar i Göteborg, Stenungsund och Lilla Edet. Vi hjälper när effekten blivit sämre, pumpen visar felkod eller det gått 2–3 år sedan senaste service."
+    description="Service och underhåll för luftvärmepumpar på Hisingen, i Göteborg, Stenungsund och Lilla Edet. Vi hjälper när effekten blivit sämre, pumpen visar felkod eller det gått 2–3 år sedan senaste service."
     primaryCTA={{ text: "Boka service", link: "/offert" }}
     image="/images/service-maintenance.png"
     imageAlt="Tekniker utför service på inomhusdel"
@@ -144,7 +144,7 @@ const serviceSchema = {
   <section class="section-padding bg-light">
     <Container>
       <h2>Vi utför service i vårt område</h2>
-      <p class="section-copy">Vi prioriterar service av luftvärmepump i Göteborg, Stenungsund och Lilla Edet. På områdessidorna finns mer lokal information om förutsättningar, hustyper och offertväg.</p>
+      <p class="section-copy">Vi prioriterar service av luftvärmepump på Hisingen, i Göteborg, Stenungsund och Lilla Edet. På områdessidorna finns mer lokal information om förutsättningar, hustyper och offertväg.</p>
       <div class="areas-grid">
         {areas.map(area => (
           <AreaCard {...area} />

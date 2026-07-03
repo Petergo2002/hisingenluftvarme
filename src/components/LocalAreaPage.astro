@@ -17,6 +17,14 @@ interface Props {
 
 const { area } = Astro.props;
 const nearbyAreas = getNearbyAreas(area);
+const localSupportLinks = [
+  { href: "/installation-luftvarmepump", label: `Installation i ${area.name}` },
+  { href: "/service-luftvarmepump", label: `Service i ${area.name}` },
+  { href: "/felsokning-luftvarmepump", label: `Felsökning i ${area.name}` },
+  { href: "/luftvarmepump-pris", label: "Pris och ROT" },
+  { href: "/produkter", label: "Jämför modeller" },
+  { href: "/projekt", label: "Se referensprojekt" },
+];
 const localServiceSchema = {
   "@type": "Service",
   "@id": `${new URL(area.url, SITE.url).toString()}#service`,
@@ -129,6 +137,9 @@ const services = [
           <ServiceCard {...service} />
         ))}
       </div>
+      <div class="local-link-strip" aria-label={`Fördjupning för luftvärmepump i ${area.name}`}>
+        {localSupportLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+      </div>
     </Container>
   </section>
 
@@ -217,7 +228,7 @@ const services = [
     <Container>
       <div class="section-header compact">
         <span class="eyebrow">Prioriterade områden</span>
-        <h2>Vi fokuserar på tre områden</h2>
+        <h2>Fler områden vi hjälper</h2>
       </div>
       <div class="areas-grid">
         {nearbyAreas.map((nearby) => (
@@ -277,6 +288,30 @@ const services = [
     background: var(--white);
     border: 1px solid var(--border);
     padding: 2rem;
+  }
+
+  .local-link-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .local-link-strip a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.7rem 1rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--secondary);
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .local-link-strip a:hover {
+    border-color: var(--secondary);
+    color: var(--secondary-hover);
   }
 
   .local-note h3,
