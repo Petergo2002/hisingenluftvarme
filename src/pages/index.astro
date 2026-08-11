@@ -112,7 +112,7 @@ const faqs = [
 <BaseLayout title={title} description={description} image="/images/hero.png" structuredData={serviceListSchema}>
   <HeroSection 
     eyebrow="Din lokala kyltekniker på Hisingen, i Göteborg, Stenungsund och Lilla Edet"
-    title="Hisingen Luftvärme"
+    title="Luftvärmepump på Hisingen och i Göteborg"
     description="Luftvärmepump på Hisingen och i Göteborg med hjälp från rådgivning och modellval till installation, service och felsökning."
     primaryCTA={{ text: "Begär kostnadsfri offert", link: "/offert" }}
     secondaryCTA={{ text: "Se våra produkter", link: "/produkter" }}
@@ -140,6 +140,10 @@ const faqs = [
           <ServiceCard {...service} />
         ))}
       </div>
+      <nav class="guide-links" aria-label="Produkter och prisguide">
+        <a href="/produkter">Jämför luftvärmepumpar</a>
+        <a href="/luftvarmepump-pris">Se priser, installation och ROT-avdrag</a>
+      </nav>
     </Container>
   </section>
 
@@ -190,6 +194,23 @@ const faqs = [
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
     gap: 1.5rem;
+  }
+  .guide-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 1.5rem;
+    margin-top: 2rem;
+  }
+  .guide-links a {
+    color: var(--white);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--secondary);
+    text-underline-offset: 0.3em;
+  }
+  .guide-links a:hover {
+    color: var(--secondary);
   }
   
   @media (max-width: 768px) {

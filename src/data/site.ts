@@ -218,7 +218,7 @@ export const PRODUCTS: Product[] = [
     price: "13 650 kr",
     image: "/images/products/kaisai-pro-heat-plus-09.png",
     imageAlt: "Kaisai Pro Heat+ 09 luftvärmepump med innedel och utedel",
-    productSheet: "/productblad/Produktblad%20Kaisai%20Pro%20Heat%2B.pdf",
+    productSheet: "/productblad/Produktblad%20Kaisai%20Pro%20Heat+.pdf",
   },
   {
     name: "Kaisai Pro Heat+ 12",
@@ -234,7 +234,7 @@ export const PRODUCTS: Product[] = [
     price: "14 350 kr",
     image: "/images/products/kaisai-pro-heat-plus-12.png",
     imageAlt: "Kaisai Pro Heat+ 12 luftvärmepump med innedel och utedel",
-    productSheet: "/productblad/Produktblad%20Kaisai%20Pro%20Heat%2B.pdf",
+    productSheet: "/productblad/Produktblad%20Kaisai%20Pro%20Heat+.pdf",
   },
 ];
 
